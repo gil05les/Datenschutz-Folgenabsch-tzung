@@ -1,0 +1,568 @@
+import { useState, useEffect } from 'react';
+import './App.css';
+
+interface LegalReference {
+  law: string;
+  article?: string;
+  paragraph?: string;
+  text: string;
+  url: string;
+}
+
+interface AnalysisResult {
+  summary: string;
+  riskLevel: 'LOW' | 'MEDIUM' | 'HIGH' | 'UNKNOWN';
+  analysis: string;
+  recommendations: string[];
+  legalReferences: LegalReference[];
+}
+
+// Icon Components
+const ScaleIcon = () => (
+  <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 8V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path>
+    <path d="M8 16V18a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2h-2"></path>
+    <line x1="8" y1="12" x2="8" y2="12"></line>
+    <line x1="16" y1="12" x2="16" y2="12"></line>
+  </svg>
+);
+
+const SearchIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="11" cy="11" r="8"></circle>
+    <path d="m21 21-4.35-4.35"></path>
+  </svg>
+);
+
+const ClipboardIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+  </svg>
+);
+
+const ShieldIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+  </svg>
+);
+
+const LightbulbIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 21h6"></path>
+    <path d="M12 3a6 6 0 0 0 6 6c0 2.5-1 4.5-3 6"></path>
+    <path d="M12 3a6 6 0 0 1-6 6c0 2.5 1 4.5 3 6"></path>
+    <path d="M12 15v3"></path>
+  </svg>
+);
+
+const FileIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+    <polyline points="14 2 14 8 20 8"></polyline>
+  </svg>
+);
+
+const AlertIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+    <line x1="12" y1="9" x2="12" y2="13"></line>
+    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+  </svg>
+);
+
+const CheckIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="20 6 9 17 4 12"></polyline>
+  </svg>
+);
+
+const WarningIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+    <line x1="12" y1="9" x2="12" y2="13"></line>
+    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+  </svg>
+);
+
+const MoonIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+  </svg>
+);
+
+const SunIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="5"></circle>
+    <line x1="12" y1="1" x2="12" y2="3"></line>
+    <line x1="12" y1="21" x2="12" y2="23"></line>
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+    <line x1="1" y1="12" x2="3" y2="12"></line>
+    <line x1="21" y1="12" x2="23" y2="12"></line>
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+  </svg>
+);
+
+const ExternalLinkIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+    <polyline points="15 3 21 3 21 9"></polyline>
+    <line x1="10" y1="14" x2="21" y2="3"></line>
+  </svg>
+);
+
+// Component to render text with clickable legal citations
+function TextWithCitations({ text, references }: { text: string; references: LegalReference[] }) {
+  if (references.length === 0) {
+    return <>{text}</>;
+  }
+
+  // Create a map of citation text to reference
+  const citationMap = new Map<string, LegalReference>();
+  references.forEach(ref => {
+    citationMap.set(ref.text, ref);
+  });
+
+  // Split text by citations and create clickable links
+  const parts: (string | JSX.Element)[] = [];
+  let lastIndex = 0;
+  let key = 0;
+
+  // Find all citations in the text
+  const citationPatterns = references.map(ref => ({
+    pattern: new RegExp(ref.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'),
+    ref: ref
+  }));
+
+  const matches: Array<{ index: number; length: number; ref: LegalReference }> = [];
+  citationPatterns.forEach(({ pattern, ref }) => {
+    let match;
+    while ((match = pattern.exec(text)) !== null) {
+      matches.push({
+        index: match.index,
+        length: match[0].length,
+        ref: ref
+      });
+    }
+  });
+
+  // Sort matches by index
+  matches.sort((a, b) => a.index - b.index);
+
+  // Build the parts array
+  matches.forEach(match => {
+    // Add text before citation
+    if (match.index > lastIndex) {
+      parts.push(text.substring(lastIndex, match.index));
+    }
+
+    // Add clickable citation
+    const citationText = text.substring(match.index, match.index + match.length);
+    parts.push(
+      <a
+        key={key++}
+        href={match.ref.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="legal-citation"
+        title={`Öffnet ${match.ref.text} auf fedlex.admin.ch`}
+      >
+        {citationText}
+        <ExternalLinkIcon />
+      </a>
+    );
+
+    lastIndex = match.index + match.length;
+  });
+
+  // Add remaining text
+  if (lastIndex < text.length) {
+    parts.push(text.substring(lastIndex));
+  }
+
+  return <>{parts.length > 0 ? parts : text}</>;
+}
+
+function App() {
+  const [text, setText] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState<AnalysisResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [password, setPassword] = useState(() => {
+    return localStorage.getItem('appPassword') || '';
+  });
+  const [showPasswordInput, setShowPasswordInput] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem('darkMode');
+    return saved ? JSON.parse(saved) : false;
+  });
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+  }, [darkMode]);
+
+  useEffect(() => {
+    if (password) {
+      localStorage.setItem('appPassword', password);
+    }
+  }, [password]);
+
+  // Scroll animation observer
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px',
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in-view');
+        }
+      });
+    }, observerOptions);
+
+    const elements = document.querySelectorAll('.scroll-animate');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, [result]);
+
+  const handleAnalyze = async () => {
+    if (!text.trim()) {
+      setError('Bitte geben Sie einen Text zur Analyse ein');
+      return;
+    }
+
+    if (!password) {
+      setShowPasswordInput(true);
+      setError('Bitte geben Sie das Passwort ein');
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    setResult(null);
+    setShowPasswordInput(false);
+
+    try {
+      const response = await fetch('/api/analyze', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-App-Password': password,
+        },
+        body: JSON.stringify({ text, password }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        if (errorData.requiresPassword || response.status === 401) {
+          setShowPasswordInput(true);
+          setPassword('');
+          localStorage.removeItem('appPassword');
+        }
+        throw new Error(errorData.error || 'Failed to analyze text');
+      }
+
+      const data = await response.json();
+      setResult(data);
+    } catch (err: any) {
+      setError(err.message || 'An error occurred while analyzing the text');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="app">
+      <div className="container">
+        <button
+          className="dark-mode-toggle"
+          onClick={() => setDarkMode(!darkMode)}
+          aria-label="Toggle dark mode"
+        >
+          {darkMode ? <SunIcon /> : <MoonIcon />}
+        </button>
+
+        <header>
+          <div className="header-icon">
+            <ScaleIcon />
+          </div>
+          <h1>Swiss Legal Assessment</h1>
+          <p>Datenschutz-Folgenabschätzung basierend auf Schweizer Recht</p>
+        </header>
+
+        <div className="input-section">
+          {(showPasswordInput || !password) && (
+            <div className="password-input-wrapper">
+              <label htmlFor="password-input" className="password-label">
+                Passwort
+              </label>
+              <input
+                id="password-input"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Passwort eingeben..."
+                className="password-input"
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter' && password) {
+                    handleAnalyze();
+                  }
+                }}
+                autoFocus
+              />
+            </div>
+          )}
+          <div className="textarea-wrapper">
+            <textarea
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="Geben Sie hier den Text ein, der im Hinblick auf Schweizer Recht analysiert werden soll..."
+              rows={8}
+              disabled={loading || !password}
+              className={loading ? 'loading' : ''}
+            />
+            {loading && (
+              <div className="loading-overlay">
+                <div className="spinner"></div>
+                <p>Analysiere...</p>
+              </div>
+            )}
+          </div>
+          <button
+            onClick={handleAnalyze}
+            disabled={loading || !text.trim() || !password}
+            className={`analyze-button ${loading ? 'loading' : ''}`}
+          >
+            {loading ? (
+              <>
+                <span className="button-spinner"></span>
+                <span>Analysiere...</span>
+              </>
+            ) : (
+              <>
+                <SearchIcon />
+                <span>Analysieren</span>
+              </>
+            )}
+          </button>
+        </div>
+
+        {error && (
+          <div className="error-message animate-slide-in">
+            <div className="error-icon">
+              <AlertIcon />
+            </div>
+            <div>
+              <strong>Fehler:</strong> {error}
+            </div>
+          </div>
+        )}
+
+        {result && (
+          <div className="results animate-fade-in">
+            <div className="result-section scroll-animate">
+              <div className="section-header">
+                <div className="section-icon">
+                  <ClipboardIcon />
+                </div>
+                <h2>Zusammenfassung</h2>
+              </div>
+              <p className="summary-text">
+                <TextWithCitations text={result.summary} references={result.legalReferences || []} />
+              </p>
+            </div>
+
+            <div className="result-section scroll-animate">
+              <div className="section-header">
+                <div className="section-icon">
+                  <ShieldIcon />
+                </div>
+                <h2>Risikobewertung</h2>
+              </div>
+              <RiskLevelIndicator riskLevel={result.riskLevel} />
+            </div>
+
+            <div className="result-section scroll-animate">
+              <div className="section-header">
+                <div className="section-icon">
+                  <LightbulbIcon />
+                </div>
+                <h2>Empfehlungen</h2>
+              </div>
+              <ul className="recommendations-list">
+                {result.recommendations.map((rec, index) => (
+                  <li key={index} className="recommendation-item scroll-animate" style={{ animationDelay: `${index * 0.1}s` }}>
+                    <span className="recommendation-number">{index + 1}</span>
+                    <span className="recommendation-text">
+                      <TextWithCitations text={rec} references={result.legalReferences || []} />
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {result.legalReferences && result.legalReferences.length > 0 && (
+              <div className="result-section scroll-animate">
+                <div className="section-header">
+                  <div className="section-icon">
+                    <FileIcon />
+                  </div>
+                  <h2>Rechtliche Verweise</h2>
+                </div>
+                <div className="legal-references">
+                  <p className="legal-references-intro">
+                    Die folgenden Rechtsquellen wurden in der Analyse zitiert:
+                  </p>
+                  <ul className="legal-references-list">
+                    {result.legalReferences.map((ref, index) => (
+                      <li key={index} className="legal-reference-item scroll-animate" style={{ animationDelay: `${index * 0.05}s` }}>
+                        <a
+                          href={ref.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="legal-reference-link"
+                        >
+                          <span className="legal-reference-text">{ref.text}</span>
+                          <ExternalLinkIcon />
+                        </a>
+                        <span className="legal-reference-law">{ref.law}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
+
+            <details className="result-section scroll-animate">
+              <summary className="details-summary">
+                <FileIcon />
+                <span>Vollständige Analyse</span>
+              </summary>
+              <pre className="full-analysis">{result.analysis}</pre>
+            </details>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function RiskLevelIndicator({ riskLevel }: { riskLevel: string }) {
+  const config = (() => {
+    switch (riskLevel) {
+      case 'LOW':
+        return {
+          color: '#57B9FF',
+          bgColor: '#E8F4FD',
+          icon: <CheckIcon />,
+          label: 'Niedrig',
+          percentage: 25,
+          description: 'Geringes Risiko',
+        };
+      case 'MEDIUM':
+        return {
+          color: '#77B1D4',
+          bgColor: '#D0E8F5',
+          icon: <WarningIcon />,
+          label: 'Mittel',
+          percentage: 60,
+          description: 'Moderates Risiko',
+        };
+      case 'HIGH':
+        return {
+          color: '#ef4444',
+          bgColor: '#fee2e2',
+          icon: <WarningIcon />,
+          label: 'Hoch',
+          percentage: 90,
+          description: 'Hohes Risiko',
+        };
+      default:
+        return {
+          color: '#77B1D4',
+          bgColor: '#E8F4FD',
+          icon: <AlertIcon />,
+          label: 'Unbekannt',
+          percentage: 50,
+          description: 'Unbekanntes Risiko',
+        };
+    }
+  })();
+
+  const [animatedPercentage, setAnimatedPercentage] = useState(0);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAnimatedPercentage(config.percentage);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [config.percentage]);
+
+  const riskClass = riskLevel.toLowerCase() === 'high' ? 'high-risk' : 
+                   riskLevel.toLowerCase() === 'medium' ? 'medium-risk' : 'low-risk';
+
+  return (
+    <div className="risk-indicator-container">
+      <div className="risk-gauge-wrapper">
+        <div className={`gauge-container ${riskClass}`} style={{ '--risk-color': config.color } as React.CSSProperties}>
+          <svg className="risk-gauge" viewBox="0 0 200 200">
+            <circle
+              className="gauge-background"
+              cx="100"
+              cy="100"
+              r="80"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="16"
+            />
+            <circle
+              className="gauge-fill"
+              cx="100"
+              cy="100"
+              r="80"
+              fill="none"
+              stroke={config.color}
+              strokeWidth="16"
+              strokeLinecap="round"
+              strokeDasharray={`${2 * Math.PI * 80}`}
+              strokeDashoffset={`${2 * Math.PI * 80 * (1 - animatedPercentage / 100)}`}
+              transform="rotate(-90 100 100)"
+              style={{
+                transition: 'stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1)',
+              }}
+            />
+          </svg>
+          <div className={`gauge-icon-wrapper ${riskClass}`} style={{ color: config.color }}>
+            {config.icon}
+          </div>
+        </div>
+        <div className="risk-label-container">
+          <div className="risk-label-main" style={{ color: config.color }}>
+            {config.label}
+          </div>
+          <div className="risk-label-sub">{config.description}</div>
+        </div>
+      </div>
+      <div className="risk-badge-modern" style={{ backgroundColor: config.bgColor, color: config.color }}>
+        <span className="risk-badge-icon">
+          {config.icon}
+        </span>
+        <span className="risk-badge-text">{riskLevel}</span>
+      </div>
+    </div>
+  );
+}
+
+export default App;
