@@ -60,32 +60,32 @@ const getFedlexUrl = (srNumber: string, article?: string): string => {
 // Note: These URLs require JavaScript to be enabled in the browser
 const SWISS_LAW_URLS: Record<string, string> = {
   // Federal Constitution (BV, SR 101)
-  'BV': 'https://www.fedlex.admin.ch/de/eli/cc/1999/404/de',
-  'Bundesverfassung': 'https://www.fedlex.admin.ch/de/eli/cc/1999/404/de',
-  'SR 101': 'https://www.fedlex.admin.ch/de/eli/cc/1999/404/de',
+  'BV': 'https://www.fedlex.admin.ch/eli/cc/1999/404/de',
+  'Bundesverfassung': 'https://www.fedlex.admin.ch/eli/cc/1999/404/de',
+  'SR 101': 'https://www.fedlex.admin.ch/eli/cc/1999/404/de',
   
   // Civil Code (ZGB, SR 210)
-  'ZGB': 'https://www.fedlex.admin.ch/de/eli/cc/24/233_245_277/de',
-  'Zivilgesetzbuch': 'https://www.fedlex.admin.ch/de/eli/cc/24/233_245_277/de',
-  'SR 210': 'https://www.fedlex.admin.ch/de/eli/cc/24/233_245_277/de',
+  'ZGB': 'https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de',
+  'Zivilgesetzbuch': 'https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de',
+  'SR 210': 'https://www.fedlex.admin.ch/eli/cc/24/233_245_233/de',
   
   // Code of Obligations (OR, SR 220)
-  'OR': 'https://www.fedlex.admin.ch/de/eli/cc/27/317_321_377/de',
-  'Obligationenrecht': 'https://www.fedlex.admin.ch/de/eli/cc/27/317_321_377/de',
-  'SR 220': 'https://www.fedlex.admin.ch/de/eli/cc/27/317_321_377/de',
+  'OR': 'https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de',
+  'Obligationenrecht': 'https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de',
+  'SR 220': 'https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de',
   
   // Data Protection Act (DSG, SR 235.1)
   // Using search URL format that will find the law in the systematic collection
   // The direct URL format may not work due to JavaScript requirements
-  'DSG': 'https://www.fedlex.admin.ch/de/filestore/fedlex.data.admin.ch/eli/cc/27/757_781_799/20230801/de',
-  'Datenschutzgesetz': 'https://www.fedlex.admin.ch/de/filestore/fedlex.data.admin.ch/eli/cc/27/757_781_799/20230801/de',
-  'DSG 2023': 'https://www.fedlex.admin.ch/de/filestore/fedlex.data.admin.ch/eli/cc/27/757_781_799/20230801/de',
-  'SR 235.1': 'https://www.fedlex.admin.ch/de/filestore/fedlex.data.admin.ch/eli/cc/27/757_781_799/20230801/de',
+  'DSG': 'https://www.fedlex.admin.ch/eli/cc/2022/491/de',
+  'Datenschutzgesetz': 'https://www.fedlex.admin.ch/eli/cc/2022/491/de',
+  'DSG 2023': 'https://www.fedlex.admin.ch/eli/cc/2022/491/de',
+  'SR 235.1': 'https://www.fedlex.admin.ch/eli/cc/2022/491/de',
   
   // Penal Code (StGB, SR 311.0)
-  'StGB': 'https://www.fedlex.admin.ch/de/eli/cc/54/757_781_799/de',
-  'Strafgesetzbuch': 'https://www.fedlex.admin.ch/de/eli/cc/54/757_781_799/de',
-  'SR 311.0': 'https://www.fedlex.admin.ch/de/eli/cc/54/757_781_799/de',
+  'StGB': 'https://www.fedlex.admin.ch/eli/cc/54/757_781_799/de',
+  'Strafgesetzbuch': 'https://www.fedlex.admin.ch/eli/cc/54/757_781_799/de',
+  'SR 311.0': 'https://www.fedlex.admin.ch/eli/cc/54/757_781_799/de',
 };
 
 // Extract legal references from text
