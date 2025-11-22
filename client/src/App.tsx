@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import jsPDF from 'jspdf';
 import './App.css';
 
 interface LegalReference {
@@ -283,6 +284,174 @@ function App() {
     }
   };
 
+  const handleDownloadPdf = () => {
+    if (!result) {
+      return;
+    }
+
+    const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+    const marginX = 48;
+    const marginY = 60;
+    const lineHeight = 18;
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const contentWidth = pageWidth - marginX * 2;
+    let cursorY = marginY;
+
+    const ensureSpace = (height = lineHeight) => {
+      const pageHeight = doc.internal.pageSize.getHeight();
+      if (cursorY + height > pageHeight - marginY) {
+        doc.addPage();
+        cursorY = marginY;
+      }
+    };
+
+    const writeLines = (lines: string[], offset = 0) => {
+      lines.forEach((line) => {
+        ensureSpace();
+        doc.text(line, marginX + offset, cursorY);
+        cursorY += lineHeight;
+      });
+    };
+
+    const addSectionTitle = (title: string) => {
+      ensureSpace(lineHeight * 2);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(16);
+      doc.setTextColor(26, 46, 58);
+      doc.text(title, marginX, cursorY);
+      cursorY += lineHeight / 2;
+      doc.setDrawColor(119, 177, 212);
+      doc.setLineWidth(1.2);
+      doc.line(marginX, cursorY, marginX + 80, cursorY);
+      cursorY += lineHeight;
+    };
+
+    const addParagraph = (textValue: string) => {
+      if (!textValue?.trim()) {
+        return;
+      }
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(12);
+      doc.setTextColor(26, 46, 58);
+      const lines = doc.splitTextToSize(textValue.trim(), contentWidth);
+      writeLines(lines);
+      cursorY += 6;
+    };
+
+    const addMultilineBlock = (textValue: string) => {
+      textValue
+        .split(/\n+/)
+        .map((paragraph) => paragraph.trim())
+        .filter(Boolean)
+        .forEach(addParagraph);
+    };
+
+    const addNumberedList = (items: string[]) => {
+      if (!items?.length) {
+        return;
+      }
+
+      items.forEach((item, index) => {
+        ensureSpace();
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(12);
+        doc.setTextColor(87, 185, 255);
+        doc.text(`${index + 1}.`, marginX, cursorY);
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(26, 46, 58);
+        const lines = doc.splitTextToSize(item, contentWidth - 30);
+        let lineCursor = cursorY;
+        lines.forEach((line: string, lineIndex: number) => {
+          if (lineIndex > 0) {
+            lineCursor += lineHeight;
+            ensureSpace();
+          }
+          doc.text(line, marginX + 30, lineCursor);
+        });
+        cursorY = lineCursor + lineHeight + 4;
+      });
+    };
+
+    // Header
+    doc.setFillColor(240, 248, 255);
+    doc.rect(0, 0, pageWidth, 105, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(22);
+    doc.setTextColor(26, 46, 58);
+    doc.text('Swiss Legal Assessment', marginX, 50);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(12);
+    doc.setTextColor(81, 120, 145);
+    const timestamp = new Intl.DateTimeFormat('de-CH', {
+      dateStyle: 'full',
+      timeStyle: 'short',
+    }).format(new Date());
+    doc.text(`Erstellt am ${timestamp}`, marginX, 70);
+    doc.text('Datenschutz-Folgenabschätzung basierend auf Schweizer Recht', marginX, 88);
+    cursorY = 130;
+
+    addSectionTitle('Zusammenfassung');
+    addParagraph(result.summary);
+
+    const riskStyles: Record<
+      AnalysisResult['riskLevel'],
+      { label: string; description: string; color: [number, number, number]; background: [number, number, number] }
+    > = {
+      LOW: { label: 'Niedrig', description: 'Geringes Risiko basierend auf der Modellbewertung', color: [87, 185, 255], background: [232, 244, 253] },
+      MEDIUM: { label: 'Mittel', description: 'Moderates Risiko mit empfohlenen Folgeaktionen', color: [119, 177, 212], background: [208, 232, 245] },
+      HIGH: { label: 'Hoch', description: 'Hohes Risiko – sofortige Maßnahmen empfohlen', color: [239, 68, 68], background: [254, 226, 226] },
+      UNKNOWN: { label: 'Unbekannt', description: 'Risikostufe konnte nicht bestimmt werden', color: [119, 177, 212], background: [232, 244, 253] },
+    };
+
+    const riskConfig = riskStyles[result.riskLevel] || riskStyles.UNKNOWN;
+
+    ensureSpace(110);
+    doc.setFillColor(...riskConfig.background);
+    doc.roundedRect(marginX, cursorY, contentWidth, 80, 12, 12, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(14);
+    doc.setTextColor(...riskConfig.color);
+    doc.text('Risikobewertung', marginX + 20, cursorY + 28);
+    doc.setFontSize(24);
+    doc.text(riskConfig.label, marginX + 20, cursorY + 52);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(12);
+    doc.setTextColor(26, 46, 58);
+    doc.text(riskConfig.description, marginX + 20, cursorY + 70);
+    cursorY += 105;
+
+    addSectionTitle('Empfehlungen');
+    addNumberedList(result.recommendations);
+
+    if (result.legalReferences && result.legalReferences.length > 0) {
+      addSectionTitle('Rechtliche Verweise');
+      result.legalReferences.forEach((ref) => {
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(12);
+        doc.setTextColor(26, 46, 58);
+        addParagraph(`${ref.text} – ${ref.law}`);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(81, 120, 145);
+        const linkLines = doc.splitTextToSize(ref.url, contentWidth);
+        writeLines(linkLines, 10);
+        cursorY += 6;
+      });
+    }
+
+    addSectionTitle('Vollständige Analyse');
+    addMultilineBlock(result.analysis);
+
+    const previewText = text.trim();
+    if (previewText) {
+      addSectionTitle('Ausgangstext (Auszug)');
+      const preview = previewText.length > 1200 ? `${previewText.slice(0, 1200)}…` : previewText;
+      addMultilineBlock(preview);
+    }
+
+    doc.save('datenschutz-analyse.pdf');
+  };
+
   return (
     <div className="app">
       <div className="container">
@@ -447,8 +616,21 @@ function App() {
 
             <details className="result-section scroll-animate">
               <summary className="details-summary">
-                <FileIcon />
-                <span>Vollständige Analyse</span>
+                <div className="details-summary-left">
+                  <FileIcon />
+                  <span>Vollständige Analyse</span>
+                </div>
+                <button
+                  className="download-button inline"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleDownloadPdf();
+                  }}
+                >
+                  <FileIcon />
+                  <span>PDF herunterladen</span>
+                </button>
               </summary>
               <pre className="full-analysis">{result.analysis}</pre>
             </details>

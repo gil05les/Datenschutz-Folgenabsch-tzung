@@ -164,6 +164,8 @@ IMPORTANT: Only provide assessments based on Swiss law. If the text relates to l
 CRITICAL: When referencing Swiss laws, you MUST cite them in the exact format: "Art. [number] [law abbreviation]" or "Art. [number] Abs. [paragraph] [law abbreviation]"
 Examples: "Art. 5 DSG", "Art. 12 Abs. 1 ZGB", "Art. 28 OR", "Art. 13 BV"
 
+LANGUAGE REQUIREMENT: Write every part of the assessment (summary, risk justification, recommendations, and any explanations) exclusively in German. Do not switch languages. Keep the structural labels (SUMMARY, RISK_LEVEL, JUSTIFICATION, RECOMMENDATIONS) exactly as specified below, but ensure the content that follows each label is fully German.
+
 1. Provide a concise 2–3 sentence summary from a Swiss legal perspective, including specific legal citations.
 2. Give a risk assessment: LOW, MEDIUM or HIGH based on compliance with Swiss law. Include a one-sentence justification with EXACT legal citations (e.g., "Art. 5 DSG").
 3. Provide 3–5 improvement recommendations as bullet points, each with specific Swiss legal citations in the format "Art. X [LAW]" or "Art. X Abs. Y [LAW]".
@@ -290,4 +292,3 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Ollama host: ${OLLAMA_HOST}`);
 });
-
