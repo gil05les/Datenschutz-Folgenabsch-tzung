@@ -147,8 +147,9 @@ const passwordMiddleware = (req: Request, res: Response, next: NextFunction) => 
     return next();
   }
 
-  // Skip password check for public endpoints (models list)
-  if (req.path === '/api/models') {
+  // Skip password check for public endpoints (auth verify and models list)
+  // Auth verify endpoint handles its own password validation
+  if (req.path === '/api/models' || req.path === '/api/auth/verify') {
     return next();
   }
 
@@ -367,8 +368,35 @@ const parseResponse = (response: string): {
   };
 };
 
-// API endpoint to get available models
+// API endpoint to verify password
+app.post('/api/auth/verify', (req: Request, res: Response) => {
+  const providedPassword = req.headers['x-app-password'] || req.body?.password;
+  
+  if (!providedPassword || providedPassword !== APP_PASSWORD) {
+    return res.status(401).json({ 
+      error: 'Ungültiges Passwort. Bitte versuchen Sie es erneut.',
+      requiresPassword: true 
+    });
+  }
+  
+  res.json({ 
+    success: true,
+    message: 'Passwort korrekt'
+  });
+});
+
+// API endpoint to get available models (requires password)
 app.get('/api/models', (req: Request, res: Response) => {
+  const providedPassword = req.headers['x-app-password'];
+  
+  // Optional password check for models endpoint - if password provided, validate it
+  if (providedPassword && providedPassword !== APP_PASSWORD) {
+    return res.status(401).json({ 
+      error: 'Ungültiges Passwort.',
+      requiresPassword: true 
+    });
+  }
+  
   res.json({
     models: OPENROUTER_MODELS,
     defaultModel: OPENROUTER_MODEL
