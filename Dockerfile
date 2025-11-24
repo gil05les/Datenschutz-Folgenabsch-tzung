@@ -1,4 +1,6 @@
-# Multi-stage build for Ollama Assessment App
+# Multi-stage build for Swiss Legal Assessment App
+# Note: For production deployment, Vercel is recommended (see VERCEL_DEPLOYMENT.md)
+# This Dockerfile is provided for optional containerized deployment
 
 # Stage 1: Build client
 FROM node:20-alpine AS client-builder
@@ -36,7 +38,6 @@ EXPOSE 3001
 # Set environment variables
 ENV NODE_ENV=production
 ENV PORT=3001
-ENV OLLAMA_HOST=http://localhost:11434
 
 # Start server
 CMD ["node", "dist/index.js"]

@@ -1,37 +1,15 @@
 # Docker Setup Instructions
 
-This document explains how to build and run the Ollama Assessment App using Docker.
+**Note:** This Docker setup is optional. For production deployment, we strongly recommend using **Vercel** (see [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md)). This Docker setup is mainly for local testing/development in a containerized environment.
+
+This document explains how to build and run the Swiss Legal Assessment App using Docker.
 
 ## Prerequisites
 
 Before building and running the Docker container, ensure you have:
 
 1. **Docker installed** on your system
-2. **Ollama installed** and running on your host machine
-3. **Model pulled**: The `qwen3:4b` model must be available in Ollama
-
-### Installing Ollama
-
-If you don't have Ollama installed:
-
-- **macOS/Linux**: Visit https://ollama.ai and follow installation instructions
-- **Windows**: Download from https://ollama.ai/download
-
-### Pulling the Model
-
-Before running the container, pull the required model:
-
-```bash
-ollama pull qwen3:4b
-```
-
-Verify the model is available:
-
-```bash
-ollama list
-```
-
-You should see `qwen3:4b` in the list.
+2. **OpenRouter API Key** (get one at https://openrouter.ai)
 
 ## Building the Docker Image
 
@@ -44,7 +22,7 @@ make docker-build
 Or manually:
 
 ```bash
-docker build -t ollama-assessment-app .
+docker build -t swiss-legal-assessment-app .
 ```
 
 This will:
@@ -54,106 +32,89 @@ This will:
 
 ## Running the Docker Container
 
-### Option 1: Using Host Networking (Recommended)
-
-This allows the container to access Ollama running on `localhost:11434`:
+Run the container with required environment variables:
 
 ```bash
-make docker-run
+docker run --rm -p 3001:3001 \
+  -e OPENROUTER_API_KEY=sk-or-v1-your-key-here \
+  -e APP_PASSWORD=your-password \
+  -e OPENROUTER_MODEL=x-ai/grok-4.1-fast:free \
+  swiss-legal-assessment-app
 ```
 
-Or manually:
+### Using Environment Variables File
+
+For convenience, you can use a `.env` file:
 
 ```bash
-docker run --rm -p 3001:3001 --network=host -e OLLAMA_HOST=http://localhost:11434 ollama-assessment-app
+docker run --rm -p 3001:3001 \
+  --env-file .env \
+  swiss-legal-assessment-app
 ```
 
-**Note**: `--network=host` works on Linux. On macOS/Windows, Docker Desktop may not support host networking. Use Option 2 instead.
-
-### Option 2: Using Environment Variable for Host IP
-
-If host networking is not available (macOS/Windows), you need to:
-
-1. Find your host machine's IP address:
-   - **macOS/Linux**: `ip addr show` or `ifconfig`
-   - **Windows**: `ipconfig`
-   - Or use `host.docker.internal` (works on Docker Desktop)
-
-2. Run the container with the host IP:
-
-```bash
-docker run --rm -p 3001:3001 -e OLLAMA_HOST=http://host.docker.internal:11434 ollama-assessment-app
-```
-
-For Linux, you might need to use your actual host IP:
-
-```bash
-docker run --rm -p 3001:3001 -e OLLAMA_HOST=http://172.17.0.1:11434 ollama-assessment-app
-```
-
-### Option 3: Running Ollama in Docker
-
-If you prefer to run Ollama in Docker as well:
-
-1. Run Ollama in a container:
-```bash
-docker run -d -p 11434:11434 --name ollama ollama/ollama
-```
-
-2. Pull the model inside the Ollama container:
-```bash
-docker exec -it ollama ollama pull qwen3:4b
-```
-
-3. Run the assessment app connected to the Ollama container:
-```bash
-docker run --rm -p 3001:3001 --link ollama:ollama -e OLLAMA_HOST=http://ollama:11434 ollama-assessment-app
-```
+Make sure your `.env` file contains:
+- `OPENROUTER_API_KEY`
+- `APP_PASSWORD`
+- `OPENROUTER_MODEL` (optional, defaults to `x-ai/grok-4.1-fast:free`)
+- `OPENROUTER_BASE_URL` (optional, defaults to `https://openrouter.ai/api/v1`)
 
 ## Accessing the Application
 
 Once the container is running, access the application at:
 
-- **Development (without Docker)**: http://localhost:5173
 - **Production (Docker)**: http://localhost:3001
+- **Development (without Docker)**: http://localhost:5173 (frontend) and http://localhost:3001 (backend)
 
 ## Troubleshooting
 
-### Cannot connect to Ollama
+### OpenRouter API Key Error
 
-If you see connection errors:
+If you see "OPENROUTER_API_KEY fehlt":
 
-1. Verify Ollama is running:
+1. Verify the environment variable is set correctly:
    ```bash
-   curl http://localhost:11434/api/tags
+   docker run --rm -e OPENROUTER_API_KEY=your-key swiss-legal-assessment-app env | grep OPENROUTER
    ```
 
-2. Check the `OLLAMA_HOST` environment variable matches your Ollama instance
-
-3. On macOS/Windows, ensure you're using `host.docker.internal` or the correct host IP
-
-### Model not found
-
-Ensure the model is pulled:
-```bash
-ollama pull qwen3:4b
-```
+2. Check that the API key is valid at https://openrouter.ai
 
 ### Port already in use
 
-If port 3001 is already in use, change it:
+If port 3001 is already in use, map to a different port:
+
 ```bash
-docker run --rm -p 3002:3001 -e PORT=3001 ollama-assessment-app
+docker run --rm -p 3002:3001 \
+  -e OPENROUTER_API_KEY=sk-or-v1-your-key-here \
+  -e APP_PASSWORD=your-password \
+  swiss-legal-assessment-app
 ```
 
 Then access at http://localhost:3002
 
+### Build errors
+
+If the build fails:
+
+1. Ensure you have enough disk space
+2. Check Docker logs: `docker build --no-cache -t swiss-legal-assessment-app .`
+3. Verify Node.js version in Dockerfile (currently 20-alpine)
+
 ## Stopping the Container
 
-Press `Ctrl+C` to stop the container, or if running in detached mode:
+Press `Ctrl+C` to stop the container, or if running in detached mode (`-d` flag):
 
 ```bash
 docker ps
 docker stop <container-id>
 ```
 
+## Production Deployment
+
+For production, use **Vercel** instead of Docker. See [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) for instructions.
+
+Vercel offers:
+- ✅ Automatic deployments from GitHub
+- ✅ Free tier with generous limits
+- ✅ Built-in HTTPS
+- ✅ Serverless functions (no container management)
+- ✅ Better performance and scalability

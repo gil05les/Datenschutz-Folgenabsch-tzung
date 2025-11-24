@@ -42,13 +42,6 @@ format:
 		echo "npx not available, skipping formatting"; \
 	fi
 
-# Build Docker image
-docker-build:
-	@echo "Building Docker image..."
-	docker build -t ollama-assessment-app .
-
-# Run Docker container
-docker-run:
-	@echo "Running Docker container..."
-	docker run --rm -p 3001:3001 --network=host -e OLLAMA_HOST=http://localhost:11434 ollama-assessment-app
+# Note: Docker support removed - use Vercel for deployment instead
+# See VERCEL_DEPLOYMENT.md for deployment instructions
 

@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "buildCommand": "make build",
+  "outputDirectory": "server/dist",
+  "installCommand": "make install",
+  "framework": null,
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/server/dist/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/server/dist/index.js"
+    }
+  ]
+}
+

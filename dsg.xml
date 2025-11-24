@@ -1,0 +1,518 @@
+<?xml version="1.0" ?>
+<dsg xmlns="">
+  <article id="art_1">
+    <number>Art. 1</number>
+    <heading>Zweck</heading>
+    <paragraph number="para">Dieses Gesetz bezweckt den Schutz der Persönlichkeit und der Grundrechte von natürlichen Personen, über die Personendaten bearbeitet werden.</paragraph>
+  </article>
+  <article id="art_2">
+    <number>Art. 2</number>
+    <heading>Persönlicher und sachlicher Geltungsbereich</heading>
+    <paragraph number="para_1">Dieses Gesetz gilt für die Bearbeitung von Personendaten natürlicher Personen durch: a. private Personen; b. Bundesorgane.</paragraph>
+    <paragraph number="para_2">Es ist nicht anwendbar auf: a. Personendaten, die von einer natürlichen Person ausschliesslich zum persönlichen Gebrauch bearbeitet werden; b. Personendaten, die von den eidgenössischen Räten und den parlamentarischen Kommissionen im Rahmen ihrer Beratungen bearbeitet werden; c. Personendaten, die bearbeitet werden durch institutionelle Begünstigte nach Artikel 2 Absatz 1 des Gaststaatgesetzes vom 22. Juni 2007</paragraph>
+    <paragraph number="para_3">Das anwendbare Verfahrensrecht regelt die Bearbeitung von Personendaten und die Rechte der betroffenen Personen in Gerichtsverfahren und in Verfahren nach bundesrechtlichen Verfahrensordnungen. Auf erstinstanzliche Verwaltungsverfahren sind die Bestimmungen dieses Gesetzes anwendbar.</paragraph>
+    <paragraph number="para_4">Die öffentlichen Register des Privatrechtsverkehrs, insbesondere der Zugang zu diesen Registern und die Rechte der betroffenen Personen, werden durch die Spezialbestimmungen des anwendbaren Bundesrechts geregelt. Enthalten die Spezialbestimmungen keine Regelung, so ist dieses Gesetz anwendbar.</paragraph>
+  </article>
+  <article id="art_3">
+    <number>Art. 3</number>
+    <heading>Räumlicher Geltungsbereich</heading>
+    <paragraph number="para_1">Dieses Gesetz gilt für Sachverhalte, die sich in der Schweiz auswirken, auch wenn sie im Ausland veranlasst werden.</paragraph>
+    <paragraph number="para_2">Für privatrechtliche Ansprüche gilt das Bundesgesetz vom 18. Dezember 1987</paragraph>
+  </article>
+  <article id="art_4">
+    <number>Art. 4</number>
+    <heading>Eidgenössischer Datenschutz- und Öffentlichkeitsbeauftragter</heading>
+    <paragraph number="para_1">Der Eidgenössische Datenschutz- und Öffentlichkeitsbeauftragte (EDÖB) beaufsichtigt die Anwendung der bundesrechtlichen Datenschutzvorschriften.</paragraph>
+    <paragraph number="para_2">Von der Aufsicht durch den EDÖB sind ausgenommen: a. die Bundesversammlung; b. der Bundesrat; c. die eidgenössischen Gerichte; d. die Bundesanwaltschaft: betreffend die Bearbeitung von Personendaten im Rahmen von Strafverfahren; e. Bundesbehörden: betreffend die Bearbeitung von Personendaten im Rahmen einer rechtsprechenden Tätigkeit oder von Verfahren der internationalen Rechtshilfe in Strafsachen.</paragraph>
+  </article>
+  <article id="art_5">
+    <number>Art. 5</number>
+    <heading>Begriffe</heading>
+    <paragraph number="para">In diesem Gesetz bedeuten: a. Personendaten: alle Angaben, die sich auf eine bestimmte oder bestimmbare natürliche Person beziehen; b. betroffene Person : natürliche Person, über die Personendaten bearbeitet werden; c. besonders schützenswerte Personendaten: 1. Daten über religiöse, weltanschauliche, politische oder gewerkschaftliche Ansichten oder Tätigkeiten, 2. Daten über die Gesundheit, die Intimsphäre oder die Zugehörigkeit zu einer Rasse oder Ethnie, 3. genetische Daten, 4. biometrische Daten, die eine natürliche Person eindeutig identifizieren, 5. Daten über verwaltungs- und strafrechtliche Verfolgungen oder Sanktionen, 6. Daten über Massnahmen der sozialen Hilfe; d. Bearbeiten : jeder Umgang mit Personendaten, unabhängig von den angewandten Mitteln und Verfahren, insbesondere das Beschaffen, Speichern, Aufbewahren, Verwenden, Verändern, Bekanntgeben, Archivieren, Löschen oder Vernichten von Daten; e. Bekanntgeben : das Übermitteln oder Zugänglichmachen von Personendaten; f. Profiling : g. Profiling mit hohem Risiko: Profiling, das ein hohes Risiko für die Persönlichkeit oder die Grundrechte der betroffenen Person mit sich bringt, indem es zu einer Verknüpfung von Daten führt, die eine Beurteilung wesentlicher Aspekte der Persönlichkeit einer natürlichen Person erlaubt; h. Verletzung der Datensicherheit: eine Verletzung der Sicherheit, die dazu i. Bundesorgan : Behörde oder Dienststelle des Bundes oder Person, die mit öffentlichen Aufgaben des Bundes betraut ist; j. Verantwortlicher : private Person oder Bundesorgan, die oder das allein oder zusammen mit anderen über den Zweck und die Mittel der Bearbeitung entscheidet; k. Auftragsbearbeiter : private Person oder Bundesorgan, die oder das im Auftrag des Verantwortlichen Personendaten bearbeitet.</paragraph>
+  </article>
+  <article id="art_6">
+    <number>Art. 6</number>
+    <heading>Grundsätze</heading>
+    <paragraph number="para_1">Personendaten müssen rechtmässig bearbeitet werden.</paragraph>
+    <paragraph number="para_2">Die Bearbeitung muss nach Treu und Glauben erfolgen und verhältnismässig sein.</paragraph>
+    <paragraph number="para_3">Personendaten dürfen nur zu einem bestimmten und für die betroffene Person erkennbaren Zweck beschafft werden; sie dürfen nur so bearbeitet werden, dass es mit diesem Zweck vereinbar ist.</paragraph>
+    <paragraph number="para_4">Sie werden vernichtet oder anonymisiert, sobald sie zum Zweck der Bearbeitung nicht mehr erforderlich sind.</paragraph>
+    <paragraph number="para_5">Wer Personendaten bearbeitet, muss sich über deren Richtigkeit vergewissern. Sie oder er muss alle angemessenen Massnahmen treffen, damit die Daten berichtigt, gelöscht oder vernichtet werden, die im Hinblick auf den Zweck ihrer Beschaffung oder Bearbeitung unrichtig oder unvollständig sind.</paragraph>
+    <paragraph number="para_6">Ist die Einwilligung der betroffenen Person erforderlich, so ist diese Einwilligung nur gültig, wenn sie für eine oder mehrere bestimmte Bearbeitungen nach angemessener Information freiwillig erteilt wird.</paragraph>
+    <paragraph number="para_7">a. die Bearbeitung von besonders schützenswerten Personendaten; b. ein Profiling mit hohem Risiko durch eine private Person; oder c. ein Profiling durch ein Bundesorgan.</paragraph>
+  </article>
+  <article id="art_7">
+    <number>Art. 7</number>
+    <heading>Datenschutz durch Technik und datenschutzfreundliche Voreinstellungen</heading>
+    <paragraph number="para_1">Der Verantwortliche ist verpflichtet, die Datenbearbeitung technisch und organisatorisch so auszugestalten, dass die Datenschutzvorschriften eingehalten werden, insbesondere die Grundsätze nach Artikel 6. Er berücksichtigt dies ab der Planung.</paragraph>
+    <paragraph number="para_2">Die technischen und organisatorischen Massnahmen müssen insbesondere dem Stand der Technik, der Art und dem Umfang der Datenbearbeitung sowie dem Risiko, das die Bearbeitung für die Persönlichkeit oder die Grundrechte der betroffenen Personen mit sich bringt, angemessen sein.</paragraph>
+    <paragraph number="para_3">Der Verantwortliche ist verpflichtet, mittels geeigneter Voreinstellungen sicherzustellen, dass die Bearbeitung der Personendaten auf das für den Verwendungszweck nötige Mindestmass beschränkt ist, soweit die betroffene Person nicht etwas anderes bestimmt.</paragraph>
+  </article>
+  <article id="art_8">
+    <number>Art. 8</number>
+    <heading>Datensicherheit</heading>
+    <paragraph number="para_1">Der Verantwortliche und der Auftragsbearbeiter gewährleisten durch geeignete technische und organisatorische Massnahmen eine dem Risiko angemessene Datensicherheit.</paragraph>
+    <paragraph number="para_2">Die Massnahmen müssen es ermöglichen, Verletzungen der Datensicherheit zu vermeiden.</paragraph>
+    <paragraph number="para_3">Der Bundesrat erlässt Bestimmungen über die Mindestanforderungen an die Datensicherheit.</paragraph>
+  </article>
+  <article id="art_9">
+    <number>Art. 9</number>
+    <heading>Bearbeitung durch Auftragsbearbeiter</heading>
+    <paragraph number="para_1">Die Bearbeitung von Personendaten kann vertraglich oder durch die Gesetzgebung einem Auftragsbearbeiter übertragen werden, wenn: a. die Daten so bearbeitet werden, wie der Verantwortliche selbst es tun dürfte; und b. keine gesetzliche oder vertragliche Geheimhaltungspflicht die Übertragung verbietet.</paragraph>
+    <paragraph number="para_2">Der Verantwortliche muss sich insbesondere vergewissern, dass der Auftragsbearbeiter in der Lage ist, die Datensicherheit zu gewährleisten.</paragraph>
+    <paragraph number="para_3">Der Auftragsbearbeiter darf die Bearbeitung nur mit vorgängiger Genehmigung des Verantwortlichen einem Dritten übertragen.</paragraph>
+    <paragraph number="para_4">Er kann dieselben Rechtfertigungsgründe geltend machen wie der Verantwortliche.</paragraph>
+  </article>
+  <article id="art_10">
+    <number>Art. 10</number>
+    <heading>Datenschutzberaterin oder -berater</heading>
+    <paragraph number="para_1">Private Verantwortliche können eine Datenschutzberaterin oder einen Datenschutzberater ernennen.</paragraph>
+    <paragraph number="para_2">Die Datenschutzberaterin oder der Datenschutzberater ist Anlaufstelle für die betroffenen Personen und für die Behörden, die in der Schweiz für den Datenschutz zuständig sind. Sie oder er hat namentlich folgende Aufgaben: a. Schulung und Beratung des privaten Verantwortlichen in Fragen des Datenschutzes; b. Mitwirkung bei der Anwendung der Datenschutzvorschriften.</paragraph>
+    <paragraph number="para_3">Private Verantwortliche können von der Ausnahme nach Artikel 23 Absatz 4 Gebrauch machen, wenn die folgenden Voraussetzungen erfüllt sind: a. Die Datenschutzberaterin oder der Datenschutzberater übt ihre oder seine Funktion b. Sie oder er übt keine Tätigkeiten aus, die mit ihren oder seinen Aufgaben als Datenschutzberaterin oder -berater unvereinbar sind. c. Sie oder er verfügt über die erforderlichen Fachkenntnisse. d. Der Verantwortliche veröffentlicht die Kontaktdaten der Datenschutzberaterin oder des Datenschutzberaters und teilt diese dem EDÖB mit.</paragraph>
+    <paragraph number="para_4">Der Bundesrat regelt die Ernennung von Datenschutzberaterinnen und Datenschutzberatern durch die Bundesorgane.</paragraph>
+  </article>
+  <article id="art_11">
+    <number>Art. 11</number>
+    <heading>Verhaltenskodizes</heading>
+    <paragraph number="para_1"/>
+    <paragraph number="para_2">Dieser nimmt zu den Verhaltenskodizes Stellung und veröffentlicht seine Stellungnahmen.</paragraph>
+  </article>
+  <article id="art_12">
+    <number>Art. 12</number>
+    <heading>Verzeichnis der Bearbeitungstätigkeiten</heading>
+    <paragraph number="para_1">Die Verantwortlichen und Auftragsbearbeiter führen je ein Verzeichnis ihrer Bearbeitungstätigkeiten.</paragraph>
+    <paragraph number="para_2">Das Verzeichnis des Verantwortlichen enthält mindestens: a. die Identität des Verantwortlichen; b. den Bearbeitungszweck; c. eine Beschreibung der Kategorien betroffener Personen und der Kategorien bearbeiteter Personendaten; d. die Kategorien der Empfängerinnen und Empfänger; e. wenn möglich die Aufbewahrungsdauer der Personendaten oder die Kriterien zur Festlegung dieser Dauer; f. wenn möglich eine allgemeine Beschreibung der Massnahmen zur Gewährleistung der Datensicherheit nach Artikel 8; g. falls die Daten ins Ausland bekanntgegeben werden, die Angabe des Staates sowie die Garantien nach Artikel 16 Absatz 2.</paragraph>
+    <paragraph number="para_3">Das Verzeichnis des Auftragsbearbeiters enthält Angaben zur Identität des Auftragsbearbeiters und des Verantwortlichen, zu den Kategorien von Bearbeitungen, die im Auftrag des Verantwortlichen durchgeführt werden, sowie die Angaben nach Absatz 2 Buchstaben f und g.</paragraph>
+    <paragraph number="para_4">Die Bundesorgane melden ihre Verzeichnisse dem EDÖB.</paragraph>
+    <paragraph number="para_5"/>
+  </article>
+  <article id="art_13">
+    <number>Art. 13</number>
+    <heading>Zertifizierung</heading>
+    <paragraph number="para_1">Die Hersteller von Datenbearbeitungssystemen oder -programmen sowie die Verantwortlichen und Auftragsbearbeiter können ihre Systeme, Produkte und Dienstleistungen einer Bewertung durch anerkannte unabhängige Zertifizierungsstellen unterziehen.</paragraph>
+    <paragraph number="para_2">Der Bundesrat erlässt Vorschriften über die Anerkennung von Zertifizierungsverfahren und die Einführung eines Datenschutz-Qualitätszeichens. Er berücksichtigt dabei das internationale Recht und die international anerkannten technischen Normen.</paragraph>
+  </article>
+  <article id="art_14">
+    <number>Art. 14</number>
+    <heading>Vertretung</heading>
+    <paragraph number="para_1">Private Verantwortliche mit Sitz oder Wohnsitz im Ausland bezeichnen eine Vertretung in der Schweiz, wenn sie Personendaten von Personen in der Schweiz bearbeiten und die Datenbearbeitung die folgenden Voraussetzungen erfüllt: a. Die Bearbeitung steht im Zusammenhang mit dem Angebot von Waren und Dienstleistungen oder der Beobachtung des Verhaltens von Personen in der Schweiz. b. Es handelt sich um eine umfangreiche Bearbeitung. c. Es handelt sich um eine regelmässige Bearbeitung. d. Die Bearbeitung bringt ein hohes Risiko für die Persönlichkeit der betroffenen Personen mit sich.</paragraph>
+    <paragraph number="para_2">Die Vertretung dient als Anlaufstelle für die betroffenen Personen und den EDÖB.</paragraph>
+    <paragraph number="para_3">Der Verantwortliche veröffentlicht den Namen und die Adresse der Vertretung.</paragraph>
+  </article>
+  <article id="art_15">
+    <number>Art. 15</number>
+    <heading>Pflichten der Vertretung</heading>
+    <paragraph number="para_1">Die Vertretung führt ein Verzeichnis der Bearbeitungstätigkeiten des Verantwortlichen, das die Angaben nach Artikel 12 Absatz 2 enthält.</paragraph>
+    <paragraph number="para_2">Auf Anfrage teilt sie dem EDÖB die im Verzeichnis enthaltenen Angaben mit.</paragraph>
+    <paragraph number="para_3">Auf Anfrage erteilt sie der betroffenen Person Auskünfte darüber, wie sie ihre Rechte ausüben kann.</paragraph>
+  </article>
+  <article id="art_16">
+    <number>Art. 16</number>
+    <heading>Grundsätze</heading>
+    <paragraph number="para_1">Personendaten dürfen ins Ausland bekanntgegeben werden, wenn der Bundesrat festgestellt hat, dass die Gesetzgebung des betreffenden Staates oder das internationale Organ einen angemessenen Schutz gewährleistet.</paragraph>
+    <paragraph number="para_2">Liegt kein Entscheid des Bundesrates nach Absatz 1 vor, so dürfen Personendaten ins Ausland bekanntgegeben werden, wenn ein geeigneter Datenschutz gewährleistet wird durch: a. einen völkerrechtlichen Vertrag; b. Datenschutzklauseln in einem Vertrag zwischen dem Verantwortlichen oder dem Auftragsbearbeiter und seiner Vertragspartnerin oder seinem Vertragspartner, die dem EDÖB vorgängig mitgeteilt wurden; c. spezifische Garantien, die das zuständige Bundesorgan erarbeitet und dem EDÖB vorgängig mitgeteilt hat; d. Standarddatenschutzklauseln, die der EDÖB vorgängig genehmigt, ausgestellt oder anerkannt hat; oder e. verbindliche unternehmensinterne Datenschutzvorschriften, die vorgängig vom EDÖB oder von einer für den Datenschutz zuständigen Behörde eines Staates, der einen angemessenen Schutz gewährleistet, genehmigt wurden.</paragraph>
+    <paragraph number="para_3">Der Bundesrat kann andere geeignete Garantien im Sinne von Absatz 2 vorsehen.</paragraph>
+  </article>
+  <article id="art_17">
+    <number>Art. 17</number>
+    <heading>Ausnahmen</heading>
+    <paragraph number="para_1">Abweichend von Artikel 16 Absätze 1 und 2 dürfen in den folgenden Fällen Personendaten ins Ausland bekanntgegeben werden: a. Die betroffene Person hat ausdrücklich in die Bekanntgabe eingewilligt. b. Die Bekanntgabe steht in unmittelbarem Zusammenhang mit dem Abschluss oder der Abwicklung eines Vertrags: 1. zwischen dem Verantwortlichen und der betroffenen Person; oder 2. zwischen dem Verantwortlichen und seiner Vertragspartnerin oder seinem Vertragspartner im Interesse der betroffenen Person. c. Die Bekanntgabe ist notwendig für: 1. die Wahrung eines überwiegenden öffentlichen Interesses; oder 2. die Feststellung, Ausübung oder Durchsetzung von Rechtsansprüchen vor einem Gericht oder einer anderen zuständigen ausländischen Behörde. d. Die Bekanntgabe ist notwendig, um das Leben oder die körperliche Unversehrtheit der betroffenen Person oder eines Dritten zu schützen, und es ist nicht möglich, innerhalb einer angemessenen Frist die Einwilligung der betroffenen Person einzuholen. e. Die betroffene Person hat die Daten allgemein zugänglich gemacht und eine Bearbeitung nicht ausdrücklich untersagt. f. Die Daten stammen aus einem gesetzlich vorgesehenen Register, das öffentlich oder Personen mit einem schutzwürdigen Interesse zugänglich ist, soweit im Einzelfall die gesetzlichen Voraussetzungen der Einsichtnahme erfüllt sind.</paragraph>
+    <paragraph number="para_2">Der Verantwortliche oder der Auftragsbearbeiter informiert den EDÖB auf Anfrage über die Bekanntgabe von Personendaten nach Absatz 1 Buchstaben b Ziffer 2, c und d.</paragraph>
+  </article>
+  <article id="art_18">
+    <number>Art. 18</number>
+    <heading>Veröffentlichung von Personendaten in elektronischer Form</heading>
+    <paragraph number="para">Werden Personendaten zur Information der Öffentlichkeit mittels automatisierter Informations- und Kommunikationsdienste allgemein zugänglich gemacht, so gilt dies nicht als Bekanntgabe ins Ausland, auch wenn die Daten vom Ausland aus zugänglich sind.</paragraph>
+  </article>
+  <article id="art_19">
+    <number>Art. 19</number>
+    <heading>Informationspflicht bei der Beschaffung von Personendaten</heading>
+    <paragraph number="para_1">Der Verantwortliche informiert die betroffene Person angemessen über die Beschaffung von Personendaten; diese Informationspflicht gilt auch, wenn die Daten nicht bei der betroffenen Person beschafft werden.</paragraph>
+    <paragraph number="para_2">Er teilt der betroffenen Person bei der Beschaffung diejenigen Informationen mit, die erforderlich sind, damit sie ihre Rechte nach diesem Gesetz geltend machen kann und eine transparente Datenbearbeitung gewährleistet ist; er teilt ihr mindestens mit: a. die Identität und die Kontaktdaten des Verantwortlichen; b. den Bearbeitungszweck; c. gegebenenfalls die Empfängerinnen und Empfänger oder die Kategorien von Empfängerinnen und Empfängern, denen Personendaten bekanntgegeben werden.</paragraph>
+    <paragraph number="para_3">Werden die Daten nicht bei der betroffenen Person beschafft, so teilt er ihr zudem die Kategorien der bearbeiteten Personendaten mit.</paragraph>
+    <paragraph number="para_4">Werden die Personendaten ins Ausland bekanntgegeben, so teilt er der betroffenen Person auch den Staat oder das internationale Organ und gegebenenfalls die Garantien nach Artikel 16 Absatz 2 oder die Anwendung einer Ausnahme nach Artikel 17 mit.</paragraph>
+    <paragraph number="para_5">Werden die Daten nicht bei der betroffenen Person beschafft, so teilt er ihr die Informationen nach den Absätzen 2–4 spätestens einen Monat, nachdem er die Daten erhalten hat, mit. Gibt der Verantwortliche die Personendaten vor Ablauf dieser Frist bekannt, so informiert er die betroffene Person spätestens im Zeitpunkt der Bekanntgabe.</paragraph>
+  </article>
+  <article id="art_20">
+    <number>Art. 20</number>
+    <heading>Ausnahmen von der Informationspflicht und Einschränkungen</heading>
+    <paragraph number="para_1">Die Informationspflicht nach Artikel 19 entfällt, wenn eine der folgenden Voraussetzungen erfüllt ist: a. Die betroffene Person verfügt bereits über die entsprechenden Informationen. b. Die Bearbeitung ist gesetzlich vorgesehen. c. Es handelt sich beim Verantwortlichen um eine private Person, die gesetzlich zur Geheimhaltung verpflichtet ist. d. Die Voraussetzungen nach Artikel 27 sind erfüllt.</paragraph>
+    <paragraph number="para_2">Werden die Personendaten nicht bei der betroffenen Person beschafft, so entfällt die Informationspflicht zudem, wenn eine der folgenden Voraussetzungen erfüllt ist: a. Die Information ist nicht möglich. b. Die Information erfordert einen unverhältnismässigen Aufwand.</paragraph>
+    <paragraph number="para_3">Der Verantwortliche kann die Mitteilung der Informationen in den folgenden Fällen einschränken, aufschieben oder darauf verzichten: a. Überwiegende Interessen Dritter erfordern die Massnahme. b. Die Information vereitelt den Zweck der Bearbeitung. c. 1. Überwiegende Interessen des Verantwortlichen erfordern die Massnahme. 2. Der Verantwortliche gibt die Personendaten nicht Dritten bekannt. d. Der Verantwortliche ist ein Bundesorgan und eine der folgenden Voraussetzungen ist erfüllt: 1. Die Massnahme ist wegen überwiegender öffentlicher Interessen, insbesondere der inneren oder der äusseren Sicherheit der Schweiz, erforderlich. 2. Die Mitteilung der Information kann eine Ermittlung, eine Untersuchung oder ein behördliches oder gerichtliches Verfahren gefährden.</paragraph>
+    <paragraph number="para_4">Unternehmen, die zum selben Konzern gehören, gelten nicht als Dritte im Sinne von Absatz 3 Buchstabe c Ziffer 2.</paragraph>
+  </article>
+  <article id="art_21">
+    <number>Art. 21</number>
+    <heading>Informationspflicht bei einer automatisierten Einzelentscheidung</heading>
+    <paragraph number="para_1">Der Verantwortliche informiert die betroffene Person über eine Entscheidung, die ausschliesslich auf einer automatisierten Bearbeitung beruht und die für sie mit einer Rechtsfolge verbunden ist oder sie erheblich beeinträchtigt (automatisierte Einzelentscheidung).</paragraph>
+    <paragraph number="para_2">Er gibt der betroffenen Person auf Antrag die Möglichkeit, ihren Standpunkt darzulegen. Die betroffene Person kann verlangen, dass die automatisierte Einzelentscheidung von einer natürlichen Person überprüft wird.</paragraph>
+    <paragraph number="para_3">Die Absätze 1 und 2 gelten nicht, wenn: a. die automatisierte Einzelentscheidung in unmittelbarem Zusammenhang mit dem Abschluss oder der Abwicklung eines Vertrags zwischen dem Verantwortlichen und der betroffenen Person steht und ihrem Begehren stattgegeben wird; oder b. die betroffene Person ausdrücklich eingewilligt hat, dass die Entscheidung automatisiert erfolgt.</paragraph>
+    <paragraph number="para_4">Ergeht die automatisierte Einzelentscheidung durch ein Bundesorgan, so muss es die Entscheidung entsprechend kennzeichnen. Absatz 2 ist nicht anwendbar, wenn die betroffene Person nach Artikel 30 Absatz 2 des Verwaltungsverfahrensgesetzes vom 20. Dezember 1968</paragraph>
+  </article>
+  <article id="art_22">
+    <number>Art. 22</number>
+    <heading>Datenschutz-Folgenabschätzung</heading>
+    <paragraph number="para_1">Der Verantwortliche erstellt vorgängig eine Datenschutz-Folgenabschätzung, wenn eine Bearbeitung ein hohes Risiko für die Persönlichkeit oder die Grundrechte der betroffenen Person mit sich bringen kann. Sind mehrere ähnliche Bearbeitungsvorgänge geplant, so kann eine gemeinsame Abschätzung erstellt werden.</paragraph>
+    <paragraph number="para_2">Das hohe Risiko ergibt sich, a. bei der umfangreichen Bearbeitung besonders schützenswerter Personendaten; b. wenn systematisch umfangreiche öffentliche Bereiche überwacht werden.</paragraph>
+    <paragraph number="para_3">Die Datenschutz-Folgenabschätzung enthält eine Beschreibung der geplanten Bearbeitung, eine Bewertung der Risiken für die Persönlichkeit oder die Grundrechte der betroffenen Person sowie die Massnahmen zum Schutz der Persönlichkeit und der Grundrechte.</paragraph>
+    <paragraph number="para_4">Von der Erstellung einer Datenschutz-Folgenabschätzung ausgenommen sind private Verantwortliche, wenn sie gesetzlich zur Bearbeitung der Daten verpflichtet sind.</paragraph>
+    <paragraph number="para_5">Der private Verantwortliche kann von der Erstellung einer Datenschutz-Folgenabschätzung absehen, a. Der Verhaltenskodex beruht auf einer Datenschutz-Folgenabschätzung. b. Er sieht Massnahmen zum Schutz der Persönlichkeit und der Grundrechte der betroffenen Person vor. c. Er wurde dem EDÖB vorgelegt.</paragraph>
+  </article>
+  <article id="art_23">
+    <number>Art. 23</number>
+    <heading>Konsultation des EDÖB</heading>
+    <paragraph number="para_1">Ergibt sich aus der Datenschutz-Folgenabschätzung, dass die geplante Bearbeitung trotz der vom Verantwortlichen vorgesehenen Massnahmen noch ein hohes Risiko für die Persönlichkeit oder die Grundrechte der betroffenen Person zur Folge hat, so holt er vorgängig die Stellungnahme des EDÖB ein.</paragraph>
+    <paragraph number="para_2">Der</paragraph>
+    <paragraph number="para_3">Hat der</paragraph>
+    <paragraph number="para_4">Der private Verantwortliche kann von der Konsultation des</paragraph>
+  </article>
+  <article id="art_24">
+    <number>Art. 24</number>
+    <heading>Meldung von Verletzungen der Datensicherheit</heading>
+    <paragraph number="para_1">Der Verantwortliche meldet dem</paragraph>
+    <paragraph number="para_2">In der Meldung nennt er mindestens die Art der Verletzung der Datensicherheit, deren Folgen und die ergriffenen oder vorgesehenen Massnahmen.</paragraph>
+    <paragraph number="para_3">Der Auftragsbearbeiter meldet dem Verantwortlichen so rasch als möglich eine Verletzung der Datensicherheit.</paragraph>
+    <paragraph number="para_4">Der Verantwortliche informiert die betroffene Person, wenn es zu ihrem Schutz erforderlich ist oder der</paragraph>
+    <paragraph number="para_5">Er kann die Information an die betroffene Person einschränken, aufschieben oder darauf verzichten, wenn: a. ein Grund nach Artikel 26 Absatz 1 Buchstabe b oder Absatz 2 Buchstabe b vorliegt oder eine gesetzliche Geheimhaltungspflicht dies verbietet; b. die Information unmöglich ist oder einen unverhältnismässigen Aufwand erfordert; oder c. die Information der betroffenen Person durch eine öffentliche Bekanntmachung in vergleichbarer Weise sichergestellt ist.</paragraph>
+    <paragraph number="para_5_bis">Der EDÖB kann die Meldung mit dem Einverständnis des Verantwortlichen zur Analyse des Vorfalls an das Bundesamt für Cybersicherheit weiterleiten. Die Mitteilung kann Personendaten enthalten, einschliesslich besonders schützenswerter Personendaten über verwaltungs- und strafrechtliche Verfolgungen oder Sanktionen betreffend den Verantwortlichen.</paragraph>
+    <paragraph number="para_6">Eine Meldung, die aufgrund dieses Artikels erfolgt, darf in einem Strafverfahren gegen die meldepflichtige Person nur mit deren Einverständnis verwendet werden.</paragraph>
+  </article>
+  <article id="art_25">
+    <number>Art. 25</number>
+    <heading>Auskunftsrecht</heading>
+    <paragraph number="para_1">Jede Person kann vom Verantwortlichen Auskunft darüber verlangen, ob Personendaten über sie bearbeitet werden.</paragraph>
+    <paragraph number="para_2">Die betroffene Person erhält diejenigen Informationen, die erforderlich sind, damit sie ihre Rechte nach diesem Gesetz geltend machen kann und eine transparente Datenbearbeitung gewährleistet ist. In jedem Fall werden ihr folgende Informationen mitgeteilt: a. die Identität und die Kontaktdaten des Verantwortlichen; b. c. der Bearbeitungszweck; d. die Aufbewahrungsdauer der Personendaten oder, falls dies nicht möglich ist, die Kriterien zur Festlegung dieser Dauer; e. die verfügbaren Angaben über die Herkunft der Personendaten, soweit sie nicht bei der betroffenen Person beschafft wurden; f. g. gegebenenfalls die Empfängerinnen und Empfänger oder die Kategorien von Empfängerinnen und Empfängern, denen Personendaten bekanntgegeben werden, sowie die Informationen nach Artikel 19 Absatz 4.</paragraph>
+    <paragraph number="para_3">Personendaten über die Gesundheit können der betroffenen Person mit ihrer Einwilligung durch eine von ihr bezeichnete Gesundheitsfachperson mitgeteilt werden.</paragraph>
+    <paragraph number="para_4">Lässt der Verantwortliche Personendaten von einem Auftragsbearbeiter bearbeiten, so bleibt er auskunftspflichtig.</paragraph>
+    <paragraph number="para_5">Niemand kann im Voraus auf das Auskunftsrecht verzichten.</paragraph>
+    <paragraph number="para_6">Der Verantwortliche muss kostenlos Auskunft erteilen. Der Bundesrat kann Ausnahmen vorsehen,</paragraph>
+    <paragraph number="para_7">Die Auskunft wird in der Regel innerhalb von 30 Tagen erteilt.</paragraph>
+  </article>
+  <article id="art_26">
+    <number>Art. 26</number>
+    <heading>Einschränkungen des Auskunftsrechts</heading>
+    <paragraph number="para_1">Der Verantwortliche kann die Auskunft verweigern, einschränken oder aufschieben, wenn: a. ein Gesetz im formellen Sinn dies vorsieht, b. dies aufgrund überwiegender Interessen Dritter erforderlich ist; oder c. das Auskunftsgesuch offensichtlich</paragraph>
+    <paragraph number="para_2">Darüber hinaus ist es in den folgenden Fällen möglich, die Auskunft zu verweigern, einzuschränken oder aufzuschieben: a. Der Verantwortliche ist eine private Person und die folgenden Voraussetzungen sind erfüllt: 1. Überwiegende Interessen des Verantwortlichen erfordern die Massnahme. 2. Der Verantwortliche gibt die Personendaten nicht Dritten bekannt. b. Der Verantwortliche ist ein Bundesorgan, und eine der folgenden Voraussetzungen ist erfüllt: 1. Die Massnahme ist wegen überwiegender öffentlicher Interessen, insbesondere der inneren oder der äusseren Sicherheit der Schweiz, erforderlich. 2. Die Mitteilung der Information kann eine Ermittlung, eine Untersuchung oder ein behördliches oder gerichtliches Verfahren gefährden.</paragraph>
+    <paragraph number="para_3">Unternehmen, die zum selben Konzern gehören, gelten nicht als Dritte im Sinne von Absatz 2 Buchstabe a Ziffer 2.</paragraph>
+    <paragraph number="para_4">Der Verantwortliche muss angeben, weshalb er die Auskunft verweigert, einschränkt oder aufschiebt.</paragraph>
+  </article>
+  <article id="art_27">
+    <number>Art. 27</number>
+    <heading>Einschränkungen des Auskunftsrechts für Medien</heading>
+    <paragraph number="para_1">Werden Personendaten ausschliesslich zur Veröffentlichung im redaktionellen Teil eines periodisch erscheinenden Mediums bearbeitet, so kann der Verantwortliche aus einem der folgenden Gründe die Auskunft verweigern, einschränken oder aufschieben: a. Die Daten geben Aufschluss über die Informationsquellen. b. Durch die Auskunft würde Einsicht in Entwürfe für Publikationen gewährt. c. Die Veröffentlichung würde die freie Meinungsbildung des Publikums gefährden.</paragraph>
+    <paragraph number="para_2">Medienschaffende können die Auskunft zudem verweigern, einschränken oder aufschieben, wenn ihnen die Personendaten ausschliesslich als persönliches Arbeitsinstrument dienen.</paragraph>
+  </article>
+  <article id="art_28">
+    <number>Art. 28</number>
+    <heading>Recht auf Datenherausgabe oder -übertragung</heading>
+    <paragraph number="para_1">Jede Person kann vom Verantwortlichen die Herausgabe ihrer Personendaten, die sie ihm bekanntgegeben hat, in einem gängigen elektronischen Format verlangen, wenn: a. der Verantwortliche die Daten automatisiert bearbeitet; und b. die Daten mit der Einwilligung der betroffenen Person oder in unmittelbarem Zusammenhang mit dem Abschluss oder der Abwicklung eines Vertrags zwischen dem Verantwortlichen und der betroffenen Person bearbeitet werden.</paragraph>
+    <paragraph number="para_2">Die betroffene Person kann zudem vom Verantwortlichen verlangen, dass er ihre Personendaten einem anderen Verantwortlichen überträgt, wenn die Voraussetzungen nach Absatz 1 erfüllt sind und dies keinen unverhältnismässigen Aufwand erfordert.</paragraph>
+    <paragraph number="para_3">Der Verantwortliche muss die Personendaten kostenlos herausgeben oder übertragen. Der Bundesrat kann Ausnahmen vorsehen, namentlich wenn der Aufwand unverhältnismässig ist.</paragraph>
+  </article>
+  <article id="art_29">
+    <number>Art. 29</number>
+    <heading>Einschränkungen des Rechts auf Datenherausgabe oder -übertragung</heading>
+    <paragraph number="para_1">Der Verantwortliche kann die Herausgabe oder Übertragung der Personendaten aus den in Artikel 26 Absätze 1 und 2 aufgeführten Gründen verweigern, einschränken oder aufschieben.</paragraph>
+    <paragraph number="para_2">Der Verantwortliche muss angeben, weshalb er die Herausgabe oder Übertragung verweigert, einschränkt oder aufschiebt.</paragraph>
+  </article>
+  <article id="art_30">
+    <number>Art. 30</number>
+    <heading>Persönlichkeitsverletzungen</heading>
+    <paragraph number="para_1">Wer Personendaten bearbeitet, darf die Persönlichkeit der betroffenen Personen nicht widerrechtlich verletzen.</paragraph>
+    <paragraph number="para_2">Eine Persönlichkeitsverletzung liegt insbesondere vor, wenn: a. Personendaten entgegen den Grundsätzen nach den Artikeln 6 und 8 bearbeitet werden; b. Personendaten entgegen der ausdrücklichen Willenserklärung der betroffenen Person bearbeitet werden; c. Dritten besonders schützenswerte Personendaten bekanntgegeben werden.</paragraph>
+    <paragraph number="para_3">In der Regel liegt keine Persönlichkeitsverletzung vor, wenn die betroffene Person die Personendaten allgemein zugänglich gemacht und eine Bearbeitung nicht ausdrücklich untersagt hat.</paragraph>
+  </article>
+  <article id="art_31">
+    <number>Art. 31</number>
+    <heading>Rechtfertigungsgründe</heading>
+    <paragraph number="para_1">Eine Persönlichkeitsverletzung ist widerrechtlich, wenn sie nicht durch Einwilligung der betroffenen Person, durch ein überwiegendes privates oder öffentliches Interesse oder durch Gesetz gerechtfertigt ist.</paragraph>
+    <paragraph number="para_2">Ein überwiegendes Interesse des Verantwortlichen fällt insbesondere in folgenden Fällen in Betracht: a. Der Verantwortliche bearbeitet die Personendaten über die Vertragspartnerin oder den Vertragspartner in unmittelbarem Zusammenhang mit dem Abschluss oder der Abwicklung eines Vertrags. b. Der Verantwortliche steht mit einer anderen Person in wirtschaftlichem Wettbewerb oder wird in wirtschaftlichen Wettbewerb treten und bearbeitet zu diesem Zweck Personendaten, die Dritten nicht bekanntgegeben werden; nicht als Dritte im Rahmen dieser Bestimmung gelten Unternehmen, die zum selben Konzern gehören wie der Verantwortliche. c. Der Verantwortliche bearbeitet Personendaten zur Prüfung der Kreditwürdigkeit der betroffenen Person, wobei die folgenden Voraussetzungen erfüllt sind: 1. Es handelt sich weder um besonders schützenswerte Personendaten noch um ein Profiling mit hohem Risiko. 2. Die Daten werden Dritten nur bekanntgegeben, wenn diese die Daten für den Abschluss oder die Abwicklung eines Vertrags mit der betroffenen Person benötigen. 3. 4. d. Der Verantwortliche bearbeitet die Personendaten beruflich und ausschliesslich zur Veröffentlichung im redaktionellen Teil eines periodisch erscheinenden Mediums oder die Daten dienen ihm, falls keine Veröffentlichung erfolgt, ausschliesslich als persönliches Arbeitsinstrument. e. Der Verantwortliche bearbeitet die Personendaten für nicht personenbezogene Zwecke, insbesondere für Forschung, Planung oder Statistik, wobei die folgenden Voraussetzungen erfüllt sind: 1. Er anonymisiert die Daten, sobald der Bearbeitungszweck dies erlaubt; ist eine Anonymisierung unmöglich oder erfordert sie einen unverhältnismässigen Aufwand, so trifft er angemessene Massnahmen, um die Bestimmbarkeit der betroffenen Person zu verhindern. 2. Handelt es sich um besonders schützenswerte Personendaten, so gibt er diese Dritten so bekannt, dass die betroffene Person nicht bestimmbar ist; ist dies nicht möglich, so muss gewährleistet sein, dass die Dritten die Daten nur zu nicht personenbezogenen Zwecken bearbeiten. 3. Die Ergebnisse werden so veröffentlicht, dass die betroffenen Personen nicht bestimmbar sind. f. Der Verantwortliche sammelt Personendaten über eine Person des öffentlichen Lebens, die sich auf das Wirken dieser Person in der Öffentlichkeit beziehen.</paragraph>
+  </article>
+  <article id="art_32">
+    <number>Art. 32</number>
+    <heading>Rechtsansprüche</heading>
+    <paragraph number="para_1">Die betroffene Person kann verlangen, dass unrichtige Personendaten berichtigt werden, es sei denn: a. eine gesetzliche Vorschrift verbietet die Änderung; b. die Personendaten werden zu Archivzwecken im öffentlichen Interesse bearbeitet.</paragraph>
+    <paragraph number="para_2">Klagen zum Schutz der Persönlichkeit richten sich nach den Artikeln 28, 28 a sowie 28 g –28 l des Zivilgesetzbuchs a. eine bestimmte Datenbearbeitung verboten wird; b. eine bestimmte Bekanntgabe von Personendaten an Dritte untersagt wird; c. Personendaten gelöscht oder vernichtet werden.</paragraph>
+    <paragraph number="para_3">Kann weder die Richtigkeit noch die Unrichtigkeit der betreffenden Personendaten festgestellt werden, so kann die klagende Partei verlangen, dass ein Bestreitungsvermerk angebracht wird.</paragraph>
+    <paragraph number="para_4">Die klagende Partei kann zudem verlangen, dass die Berichtigung, die Löschung oder die Vernichtung, das Verbot der Bearbeitung oder der Bekanntgabe an Dritte, der Bestreitungsvermerk oder das Urteil Dritten mitgeteilt oder veröffentlicht wird.</paragraph>
+  </article>
+  <article id="art_33">
+    <number>Art. 33</number>
+    <heading>Kontrolle und Verantwortung bei gemeinsamer Bearbeitung von Personendaten</heading>
+    <paragraph number="para">Der Bundesrat regelt die Kontrollverfahren und die Verantwortung für den Datenschutz, wenn ein Bundesorgan Personendaten zusammen mit anderen Bundesorganen, mit kantonalen Organen oder mit privaten Personen bearbeitet.</paragraph>
+  </article>
+  <article id="art_34">
+    <number>Art. 34</number>
+    <heading>Rechtsgrundlagen</heading>
+    <paragraph number="para_1">Bundesorgane dürfen Personendaten nur bearbeiten, wenn dafür eine gesetzliche Grundlage besteht.</paragraph>
+    <paragraph number="para_2">Eine Grundlage in einem Gesetz im formellen Sinn ist in folgenden Fällen erforderlich: a. Es handelt sich um die Bearbeitung von besonders schützenswerten Personendaten. b. Es handelt sich um ein Profiling. c. Der Bearbeitungszweck oder die Art und Weise der Datenbearbeitung können zu einem schwerwiegenden Eingriff in die Grundrechte der betroffenen Person führen.</paragraph>
+    <paragraph number="para_3">Für die Bearbeitung von Personendaten nach Absatz 2 Buchstaben a und b ist eine Grundlage in einem Gesetz im materiellen Sinn ausreichend, wenn die folgenden Voraussetzungen erfüllt sind: a. Die Bearbeitung ist für eine in einem Gesetz im formellen Sinn festgelegte Aufgabe unentbehrlich. b. Der Bearbeitungszweck birgt für die Grundrechte der betroffenen Person keine besonderen Risiken.</paragraph>
+    <paragraph number="para_4">In Abweichung von den Absätzen 1–3 dürfen Bundesorgane Personendaten bearbeiten, wenn eine der folgenden Voraussetzungen erfüllt ist: a. Der Bundesrat hat die Bearbeitung bewilligt, weil er die Rechte der betroffenen Person für nicht gefährdet hält. b. Die betroffene Person hat im Einzelfall in die Bearbeitung eingewilligt oder hat ihre Personendaten allgemein zugänglich gemacht und eine Bearbeitung nicht ausdrücklich untersagt. c. Die Bearbeitung ist notwendig, um das Leben oder die körperliche Unversehrtheit der betroffenen Person oder eines Dritten zu schützen, und es ist nicht möglich, innerhalb einer angemessenen Frist die Einwilligung der betroffenen Person einzuholen.</paragraph>
+  </article>
+  <article id="art_35">
+    <number>Art. 35</number>
+    <heading>Automatisierte Datenbearbeitung im Rahmen von Pilotversuchen</heading>
+    <paragraph number="para_1">Der Bundesrat kann vor Inkrafttreten eines Gesetzes im formellen Sinn die automatisierte Bearbeitung von besonders schützenswerten Personendaten oder andere Datenbearbeitungen nach Artikel 34 Absatz 2 Buchstaben b und c bewilligen, wenn: a. die Aufgaben, aufgrund deren die Bearbeitung erforderlich ist, in einem bereits in Kraft stehenden Gesetz im formellen Sinn geregelt sind; b. ausreichende Massnahmen getroffen werden, um einen Eingriff in die Grundrechte der betroffenen Personen auf das Mindestmass zu begrenzen; und c. für die praktische Umsetzung der Datenbearbeitung eine Testphase vor dem Inkrafttreten, insbesondere aus technischen Gründen, unentbehrlich ist.</paragraph>
+    <paragraph number="para_2">Er holt vorgängig die Stellungnahme des EDÖB ein.</paragraph>
+    <paragraph number="para_3">Das zuständige Bundesorgan legt dem Bundesrat spätestens zwei Jahre nach der Aufnahme des Pilotversuchs einen Evaluationsbericht vor. Es schlägt darin die Fortführung oder die Einstellung der Bearbeitung vor.</paragraph>
+    <paragraph number="para_4">Die automatisierte Datenbearbeitung muss in jedem Fall abgebrochen werden, wenn innerhalb von fünf Jahren nach Aufnahme des Pilotversuchs kein Gesetz im formellen Sinn in Kraft getreten ist, das die erforderliche Rechtsgrundlage enthält.</paragraph>
+  </article>
+  <article id="art_36">
+    <number>Art. 36</number>
+    <heading>Bekanntgabe von Personendaten</heading>
+    <paragraph number="para_1">Bundesorgane dürfen Personendaten nur bekanntgeben, wenn dafür eine gesetzliche Grundlage nach Artikel 34 Absätze 1–3 besteht.</paragraph>
+    <paragraph number="para_2">Sie dürfen Personendaten in Abweichung von Absatz 1 im Einzelfall bekanntgeben, wenn eine der folgenden Voraussetzungen erfüllt ist: a. Die Bekanntgabe der Daten ist für den Verantwortlichen oder für die Empfängerin oder den Empfänger zur Erfüllung einer gesetzlichen Aufgabe unentbehrlich. b. Die betroffene Person hat in die Bekanntgabe eingewilligt. c. Die Bekanntgabe der Daten ist notwendig, um das Leben oder die körperliche Unversehrtheit der betroffenen Person oder eines Dritten zu schützen, und es ist nicht möglich, innerhalb einer angemessenen Frist die Einwilligung der betroffenen Person einzuholen. d. Die betroffene Person hat ihre Daten allgemein zugänglich gemacht und eine Bekanntgabe nicht ausdrücklich untersagt. e. Die Empfängerin oder der Empfänger macht glaubhaft, dass die betroffene Person die Einwilligung verweigert oder Widerspruch gegen die Bekanntgabe einlegt, um ihr oder ihm die Durchsetzung von Rechtsansprüchen oder die Wahrnehmung anderer schutzwürdiger Interessen zu verwehren; der betroffenen Person ist vorgängig Gelegenheit zur Stellungnahme zu geben, es sei denn, dies ist unmöglich oder mit unverhältnismässigem Aufwand verbunden.</paragraph>
+    <paragraph number="para_3">Die Bundesorgane dürfen Personendaten darüber hinaus im Rahmen der behördlichen Information der Öffentlichkeit von Amtes wegen oder gestützt auf das Öffentlichkeitsgesetz vom 17. Dezember 2004 a. die Daten im Zusammenhang mit der Erfüllung öffentlicher Aufgaben stehen; und b. an der Bekanntgabe ein überwiegendes öffentliches Interesse besteht.</paragraph>
+    <paragraph number="para_4">Sie dürfen Name, Vorname, Adresse und Geburtsdatum einer Person auf Anfrage auch bekanntgeben, wenn die Voraussetzungen nach Absatz 1 oder 2 nicht erfüllt sind.</paragraph>
+    <paragraph number="para_5">Sie dürfen Personendaten mittels automatisierter Informations- und Kommunikationsdienste allgemein zugänglich machen, wenn eine Rechtsgrundlage die Veröffentlichung dieser Daten vorsieht oder wenn sie Daten gestützt auf Absatz 3 bekanntgeben. Besteht kein öffentliches Interesse mehr daran, die Daten allgemein zugänglich zu machen, so werden die betreffenden Daten aus dem automatisierten Informations- und Kommunikationsdienst gelöscht.</paragraph>
+    <paragraph number="para_6">Die Bundesorgane lehnen die Bekanntgabe ab, schränken sie ein oder verbinden sie mit Auflagen, wenn: a. wesentliche öffentliche Interessen oder offensichtlich schutzwürdige Interessen der betroffenen Person es verlangen; oder b. gesetzliche Geheimhaltungspflichten oder besondere Datenschutzvorschriften es verlangen.</paragraph>
+  </article>
+  <article id="art_37">
+    <number>Art. 37</number>
+    <heading>Widerspruch gegen die Bekanntgabe von Personendaten</heading>
+    <paragraph number="para_1">Die betroffene Person, die ein schutzwürdiges Interesse glaubhaft macht, kann gegen die Bekanntgabe bestimmter Personendaten durch das verantwortliche Bundesorgan Widerspruch einlegen.</paragraph>
+    <paragraph number="para_2">Das Bundesorgan weist das Begehren ab, wenn eine der folgenden Voraussetzungen erfüllt ist: a. Es besteht eine Rechtspflicht zur Bekanntgabe. b. Die Erfüllung seiner Aufgaben wäre sonst gefährdet.</paragraph>
+    <paragraph number="para_3">Artikel 36 Absatz 3 bleibt vorbehalten.</paragraph>
+  </article>
+  <article id="art_38">
+    <number>Art. 38</number>
+    <heading>Angebot von Unterlagen an das Bundesarchiv</heading>
+    <paragraph number="para_1">In Übereinstimmung mit dem Archivierungsgesetz vom 26. Juni 1998</paragraph>
+    <paragraph number="para_2">Sie vernichten die vom Bundesarchiv als nicht archivwürdig bezeichneten Personendaten, es sei denn: a. diese werden anonymisiert; b. diese müssen zu Beweis- oder Sicherheitszwecken oder zur Wahrung der schutzwürdigen Interessen der betroffenen Person aufbewahrt werden.</paragraph>
+  </article>
+  <article id="art_39">
+    <number>Art. 39</number>
+    <heading>Datenbearbeitung für nicht personenbezogene Zwecke</heading>
+    <paragraph number="para_1">Bundesorgane dürfen Personendaten für nicht personenbezogene Zwecke, insbesondere für Forschung, Planung oder Statistik, bearbeiten, wenn: a. die Daten anonymisiert werden, sobald der Bearbeitungszweck dies erlaubt; b. das Bundesorgan privaten Personen besonders schützenswerte Personendaten nur so bekanntgibt, dass die betroffenen Personen nicht bestimmbar sind; c. die Empfängerin oder der Empfänger Dritten die Daten nur mit der Zustimmung des Bundesorgans weitergibt, das die Daten bekanntgegeben hat; und d. die Ergebnisse nur so veröffentlicht werden, dass die betroffenen Personen nicht bestimmbar sind.</paragraph>
+    <paragraph number="para_2">Die Artikel 6 Absatz 3, 34 Absatz 2 sowie 36 Absatz 1 sind nicht anwendbar.</paragraph>
+  </article>
+  <article id="art_40">
+    <number>Art. 40</number>
+    <heading>Privatrechtliche Tätigkeit von Bundesorganen</heading>
+    <paragraph number="para">Handelt ein Bundesorgan privatrechtlich, so gelten die Bestimmungen für die Datenbearbeitung durch private Personen.</paragraph>
+  </article>
+  <article id="art_41">
+    <number>Art. 41</number>
+    <heading>Ansprüche und Verfahren</heading>
+    <paragraph number="para_1">Wer ein schutzwürdiges Interesse hat, kann vom verantwortlichen Bundesorgan verlangen, dass es: a. die widerrechtliche Bearbeitung der betreffenden Personendaten unterlässt; b. die Folgen einer widerrechtlichen Bearbeitung beseitigt; c. die Widerrechtlichkeit der Bearbeitung feststellt.</paragraph>
+    <paragraph number="para_2">Die Gesuchstellerin oder der Gesuchsteller kann insbesondere verlangen, dass das Bundesorgan: a. die betreffenden Personendaten berichtigt, löscht oder vernichtet; b. seinen Entscheid, namentlich über die Berichtigung, Löschung oder Vernichtung, den Widerspruch gegen die Bekanntgabe nach Artikel 37 oder den Bestreitungsvermerk nach Absatz 4 Dritten mitteilt oder veröffentlicht.</paragraph>
+    <paragraph number="para_3">Statt die Personendaten zu löschen oder zu vernichten, schränkt das Bundesorgan die Bearbeitung ein, wenn: a. die betroffene Person die Richtigkeit der Personendaten bestreitet und weder die Richtigkeit noch die Unrichtigkeit festgestellt werden kann; b. überwiegende Interessen Dritter dies erfordern; c. ein überwiegendes öffentliches Interesse, namentlich die innere oder die äussere Sicherheit der Schweiz, dies erfordert; d. die Löschung oder Vernichtung der Daten eine Ermittlung, eine Untersuchung oder ein behördliches oder gerichtliches Verfahren gefährden kann.</paragraph>
+    <paragraph number="para_4">Kann weder die Richtigkeit noch die Unrichtigkeit der betreffenden Personendaten festgestellt werden, so bringt das Bundesorgan bei den Daten einen Bestreitungsvermerk an.</paragraph>
+    <paragraph number="para_5">Die Berichtigung, Löschung oder Vernichtung von Personendaten kann nicht verlangt werden in Bezug auf die Bestände öffentlich zugänglicher Bibliotheken, Bildungseinrichtungen, Museen, Archive oder anderer öffentlicher Gedächtnisinstitutionen. Macht die Gesuchstellerin oder der Gesuchsteller ein überwiegendes Interesse glaubhaft, so kann sie oder er verlangen, dass die Institution den Zugang zu den umstrittenen Daten beschränkt. Die Absätze 3 und 4 sind nicht anwendbar.</paragraph>
+    <paragraph number="para_6">Das Verfahren richtet sich nach dem VwVG</paragraph>
+  </article>
+  <article id="art_42">
+    <number>Art. 42</number>
+    <heading>Verfahren im Falle der Bekanntgabe von amtlichen Dokumenten, die Personendaten enthalten</heading>
+    <paragraph number="para">Ist ein Verfahren betreffend den Zugang zu amtlichen Dokumenten, die Personendaten enthalten, im Sinne des Öffentlichkeitsgesetzes vom 17. Dezember 2004</paragraph>
+  </article>
+  <article id="art_43">
+    <number>Art. 43</number>
+    <heading>Wahl und Stellung</heading>
+    <paragraph number="para_1"/>
+    <paragraph number="para_2"/>
+    <paragraph number="para_3">Das Arbeitsverhältnis der oder des Beauftragten richtet sich, soweit dieses Gesetz nichts anderes vorsieht, nach dem Bundespersonalgesetz vom 24. März 2000</paragraph>
+    <paragraph number="para_3_bis">Die Bundesversammlung erlässt die Ausführungsbestimmungen über das Arbeitsverhältnis der oder des Beauftragten in einer Verordnung.</paragraph>
+    <paragraph number="para_4">Die oder der Beauftragte übt ihre oder seine Funktion unabhängig aus, ohne Weisungen einer Behörde oder eines Dritten einzuholen oder entgegenzunehmen. Sie oder er ist administrativ der Bundeskanzlei zugeordnet.</paragraph>
+    <paragraph number="para_5">Sie oder er verfügt über ein ständiges Sekretariat und ein eigenes Budget. Sie oder er stellt sein Personal an.</paragraph>
+    <paragraph number="para_6">Sie oder er untersteht nicht dem Beurteilungssystem nach Artikel 4 Absatz 3 BPG.</paragraph>
+  </article>
+  <article id="art_44">
+    <number>Art. 44</number>
+    <heading>Amtsdauer, Wiederwahl und Beendigung der Amtsdauer</heading>
+    <paragraph number="para_1"/>
+    <paragraph number="para_2">Die oder der Beauftragte kann das Arbeitsverhältnis auf Ende jedes Monats unter Einhaltung einer Kündigungsfrist von sechs Monaten kündigen. Die Gerichtskommission kann der oder dem Beauftragten im Einzelfall eine kürzere Kündigungsfrist zugestehen, wenn keine wesentlichen Interessen entgegenstehen.</paragraph>
+    <paragraph number="para_3">a. vorsätzlich oder grobfahrlässig Amtspflichten schwer verletzt hat; oder b. die Fähigkeit, das Amt auszuüben, auf Dauer verloren hat.</paragraph>
+  </article>
+  <article id="art_44_a">
+    <number>Art. 44 a</number>
+    <heading>Verwarnung</heading>
+    <paragraph number="para">Die Gerichtskommission kann eine Verwarnung aussprechen, wenn sie feststellt, dass die oder der Beauftragte Amtspflichten verletzt hat.</paragraph>
+  </article>
+  <article id="art_45">
+    <number>Art. 45</number>
+    <heading>Budget</heading>
+    <paragraph number="para"/>
+  </article>
+  <article id="art_46">
+    <number>Art. 46</number>
+    <heading>Unvereinbarkeit</heading>
+    <paragraph number="para">Die oder der Beauftragte darf weder der Bundesversammlung noch dem Bundesrat angehören und in keinem anderen Arbeitsverhältnis mit dem Bund stehen.</paragraph>
+  </article>
+  <article id="art_47">
+    <number>Art. 47</number>
+    <heading>Nebenbeschäftigung</heading>
+    <paragraph number="para_1"/>
+    <paragraph number="para_2"/>
+  </article>
+  <article id="art_47_a">
+    <number>Art. 47 a</number>
+    <heading>Ausstand</heading>
+    <paragraph number="para">Ist der Ausstand der oder des Beauftragten streitig, so entscheidet darüber die Präsidentin oder der Präsident der auf dem Gebiet des Datenschutzes zuständigen Abteilung des Bundesverwaltungsgerichts.</paragraph>
+  </article>
+  <article id="art_48">
+    <number>Art. 48</number>
+    <heading>Selbstkontrolle des EDÖB</heading>
+    <paragraph number="para">Der EDÖB stellt durch geeignete Kontrollmassnahmen, insbesondere in Bezug auf die Datensicherheit, sicher, dass der rechtskonforme Vollzug der bundesrechtlichen Datenschutzvorschriften innerhalb seiner Behörde gewährleistet ist.</paragraph>
+  </article>
+  <article id="art_49">
+    <number>Art. 49</number>
+    <heading>Untersuchung</heading>
+    <paragraph number="para_1">Der</paragraph>
+    <paragraph number="para_2">Er kann von der Eröffnung einer Untersuchung absehen, wenn die Verletzung der Datenschutzvorschriften von geringfügiger Bedeutung ist.</paragraph>
+    <paragraph number="para_3">Das Bundesorgan oder die private Person erteilt dem</paragraph>
+    <paragraph number="para_4">Hat die betroffene Person Anzeige erstattet, so informiert der</paragraph>
+  </article>
+  <article id="art_50">
+    <number>Art. 50</number>
+    <heading>Befugnisse</heading>
+    <paragraph number="para_1">Kommt das Bundesorgan oder die private Person den Mitwirkungspflichten nicht nach, so kann der a. Zugang zu allen Auskünften, Unterlagen, Verzeichnissen der Bearbeitungstätigkeiten und Personendaten, die für die Untersuchung erforderlich sind; b. Zugang zu Räumlichkeiten und Anlagen; c. Zeugeneinvernahmen; d. Begutachtungen durch Sachverständige.</paragraph>
+    <paragraph number="para_2">Das Berufsgeheimnis bleibt vorbehalten.</paragraph>
+    <paragraph number="para_3"/>
+  </article>
+  <article id="art_51">
+    <number>Art. 51</number>
+    <heading>Verwaltungsmassnahmen</heading>
+    <paragraph number="para_1">Liegt eine Verletzung von Datenschutzvorschriften vor, so kann der</paragraph>
+    <paragraph number="para_2">Er kann die Bekanntgabe ins Ausland aufschieben oder untersagen, wenn sie gegen die Voraussetzungen nach Artikel 16 oder 17 oder gegen Bestimmungen betreffend die Bekanntgabe von Personendaten ins Ausland in anderen Bundesgesetzen verstösst.</paragraph>
+    <paragraph number="para_3">Er kann namentlich anordnen, dass das Bundesorgan oder die private Person: a. ihn nach den Artikeln 16 Absatz 2 Buchstaben b und c sowie 17 Absatz 2 informiert; b. die Vorkehren nach den Artikeln 7 und 8 trifft; c. nach den Artikeln 19 und 21 die betroffenen Personen informiert; d. eine Datenschutz-Folgenabschätzung nach Artikel 22 vornimmt; e. ihn nach Artikel 23 konsultiert; f. ihn oder gegebenenfalls die betroffenen Personen nach Artikel 24 informiert; g. der betroffenen Person die Auskünfte nach Artikel 25 erteilt.</paragraph>
+    <paragraph number="para_4">Er kann auch anordnen, dass der private Verantwortliche mit Sitz oder Wohnsitz im Ausland eine Vertretung nach Artikel 14 bezeichnet.</paragraph>
+    <paragraph number="para_5">Hat das Bundesorgan oder die private Person während der Untersuchung die erforderlichen Massnahmen getroffen, um die Einhaltung der Datenschutzvorschriften wiederherzustellen, so kann der</paragraph>
+  </article>
+  <article id="art_52">
+    <number>Art. 52</number>
+    <heading>Verfahren</heading>
+    <paragraph number="para_1">Das Untersuchungsverfahren sowie Verfügungen nach den Artikeln 50 und 51 richten sich nach dem VwVG</paragraph>
+    <paragraph number="para_2">Partei ist nur das Bundesorgan oder die private Person, gegen das oder die eine Untersuchung eröffnet wurde.</paragraph>
+    <paragraph number="para_3">Der</paragraph>
+  </article>
+  <article id="art_53">
+    <number>Art. 53</number>
+    <heading>Koordination</heading>
+    <paragraph number="para_1">Bundesverwaltungsbehörden, die nach einem anderen Bundesgesetz private Personen oder Organisationen ausserhalb der Bundesverwaltung beaufsichtigen, laden den</paragraph>
+    <paragraph number="para_2">Führt der</paragraph>
+  </article>
+  <article id="art_54">
+    <number>Art. 54</number>
+    <heading>Amtshilfe zwischen schweizerischen Behörden</heading>
+    <paragraph number="para_1">Bundesbehörden und kantonale Behörden geben dem</paragraph>
+    <paragraph number="para_2">Der a. den Behörden, die in der Schweiz für den Datenschutz zuständig sind; b. den zuständigen Strafverfolgungsbehörden, falls es um die Anzeige einer Straftat nach Artikel 65 Absatz 2 geht; c. den Bundesbehörden sowie den kantonalen und kommunalen Polizeiorganen für den Vollzug der Massnahmen nach den Artikeln 50 Absatz 3 und 51.</paragraph>
+  </article>
+  <article id="art_55">
+    <number>Art. 55</number>
+    <heading>Amtshilfe gegenüber ausländischen Behörden</heading>
+    <paragraph number="para_1">Der a. Die Gegenseitigkeit der Amtshilfe ist sichergestellt. b. Die Informationen und Personendaten werden nur für das den Datenschutz betreffende Verfahren verwendet, das dem Amtshilfeersuchen zugrunde liegt. c. Die empfangende Behörde verpflichtet sich, das Berufsgeheimnis sowie Geschäfts- und Fabrikationsgeheimnisse zu wahren. d. Die Informationen und Personendaten werden Dritten nur bekanntgegeben, wenn die Behörde, die sie übermittelt hat, dies vorgängig genehmigt. e. Die empfangende Behörde verpflichtet sich, die Auflagen und Einschränkungen der Behörde einzuhalten, die ihr die Informationen und Personendaten übermittelt hat.</paragraph>
+    <paragraph number="para_2">Um sein Amtshilfegesuch zu begründen oder um dem Ersuchen einer Behörde Folge zu leisten, kann der a. Identität des Verantwortlichen, des Auftragsbearbeiters oder anderer beteiligter Dritter; b. Kategorien der betroffenen Personen; c. Identität der betroffenen Personen, falls: 1. die betroffenen Personen eingewilligt haben, oder 2. die Mitteilung der Identität der betroffenen Personen unentbehrlich ist zur Erfüllung der gesetzlichen Aufgaben durch den EDÖB oder die ausländische Behörde; d. bearbeitete Personendaten oder Kategorien bearbeiteter Personendaten; e. Bearbeitungszweck; f. Empfängerinnen und Empfänger oder die Kategorien der Empfängerinnen und Empfänger; g. technische und organisatorische Massnahmen.</paragraph>
+    <paragraph number="para_3">Bevor der</paragraph>
+  </article>
+  <article id="art_56">
+    <number>Art. 56</number>
+    <heading>Register</heading>
+    <paragraph number="para">Der EDÖB führt ein Register der Bearbeitungstätigkeiten der Bundesorgane. Das Register wird veröffentlicht.</paragraph>
+  </article>
+  <article id="art_57">
+    <number>Art. 57</number>
+    <heading>Information</heading>
+    <paragraph number="para_1">Der</paragraph>
+    <paragraph number="para_2">In Fällen von allgemeinem Interesse informiert der</paragraph>
+  </article>
+  <article id="art_58">
+    <number>Art. 58</number>
+    <heading>Weitere Aufgaben</heading>
+    <paragraph number="para_1">Der a. Er informiert, schult und berät die Bundesorgane sowie private Personen in Fragen des Datenschutzes. b. Er unterstützt die kantonalen Organe und arbeitet mit schweizerischen und ausländischen Behörden, die für den Datenschutz zuständig sind, zusammen. c. Er sensibilisiert die Bevölkerung, insbesondere schutzbedürftige Personen, in Bezug auf den Datenschutz. d. Er erteilt betroffenen Personen auf Anfrage Auskunft darüber, wie sie ihre Rechte ausüben können. e. Er nimmt Stellung zu Erlassentwürfen und Massnahmen des Bundes, die eine Datenbearbeitung zur Folge haben. f. Er nimmt die ihm durch das Öffentlichkeitsgesetz vom 17. Dezember 2004 g.</paragraph>
+    <paragraph number="para_2">Er kann auch Bundesorgane beraten, die gemäss den Artikeln 2 und 4 nicht seiner Aufsicht unterstehen. Die Bundesorgane können ihm Akteneinsicht gewähren.</paragraph>
+    <paragraph number="para_3"/>
+  </article>
+  <article id="art_59">
+    <number>Art. 59</number>
+    <paragraph number="para_1">Der a. die Stellungnahme zu einem Verhaltenskodex nach Artikel 11 Absatz 2; b. c. d. e. Beratungen in Fragen des Datenschutzes nach Artikel 58 Absatz 1 Buchstabe a.</paragraph>
+    <paragraph number="para_2">Der Bundesrat legt die Höhe der Gebühren fest.</paragraph>
+    <paragraph number="para_3">Er kann festlegen, in welchen Fällen es möglich ist, auf die Erhebung einer Gebühr zu verzichten oder sie zu reduzieren.</paragraph>
+  </article>
+  <article id="art_60">
+    <number>Art. 60</number>
+    <heading>Verletzung von Informations-, Auskunfts- und Mitwirkungspflichten</heading>
+    <paragraph number="para_1">Mit Busse bis zu 250 000 Franken werden private Personen auf Antrag bestraft: a. die ihre Pflichten nach den Artikeln 19, 21 und 25–27 verletzen, indem sie vorsätzlich eine falsche oder unvollständige Auskunft erteilen; b. die es vorsätzlich unterlassen: 1. die betroffene Person nach den Artikeln 19 Absatz 1 und 21 Absatz 1 zu informieren, oder 2. ihr die Angaben nach Artikel 19 Absatz 2 zu liefern.</paragraph>
+    <paragraph number="para_2">Mit Busse bis zu 250 000 Franken werden private Personen bestraft, die unter Verstoss gegen Artikel 49 Absatz 3 dem</paragraph>
+  </article>
+  <article id="art_61">
+    <number>Art. 61</number>
+    <heading>Verletzung von Sorgfaltspflichten</heading>
+    <paragraph number="para">Mit Busse bis zu 250 000 Franken werden private Personen auf Antrag bestraft, die vorsätzlich: a. unter Verstoss gegen Artikel 16 Absätze 1 und 2 und ohne dass die Voraussetzungen nach Artikel 17 erfüllt sind, Personendaten ins Ausland bekanntgeben; b. die Datenbearbeitung einem Auftragsbearbeiter übergeben, ohne dass die Voraussetzungen nach Artikel 9 Absätze 1 und 2 erfüllt sind; c.</paragraph>
+  </article>
+  <article id="art_62">
+    <number>Art. 62</number>
+    <heading>Verletzung der beruflichen Schweigepflicht</heading>
+    <paragraph number="para_1">Wer geheime Personendaten vorsätzlich offenbart, von denen sie oder er bei der Ausübung ihres oder seines Berufes, der die Kenntnis solcher Daten erfordert, Kenntnis erlangt hat, wird auf Antrag mit Busse bis zu 250 000 Franken bestraft.</paragraph>
+    <paragraph number="para_2">Gleich wird bestraft, wer vorsätzlich geheime Personendaten offenbart, von denen sie oder er bei der Tätigkeit für eine geheimhaltungspflichtige Person oder während der Ausbildung bei dieser Kenntnis erlangt hat.</paragraph>
+    <paragraph number="para_3">Das Offenbaren geheimer Personendaten ist auch nach Beendigung der Berufsausübung oder der Ausbildung strafbar.</paragraph>
+  </article>
+  <article id="art_63">
+    <number>Art. 63</number>
+    <heading>Missachten von Verfügungen</heading>
+    <paragraph number="para">Mit Busse bis zu 250 000 Franken werden private Personen bestraft, die einer Verfügung des EDÖB oder einem Entscheid der Rechtsmittelinstanzen, die oder der unter Hinweis auf die Strafdrohung dieses Artikels ergangen ist, vorsätzlich nicht Folge leisten.</paragraph>
+  </article>
+  <article id="art_64">
+    <number>Art. 64</number>
+    <heading>Widerhandlungen in Geschäftsbetrieben</heading>
+    <paragraph number="para_1">Für Widerhandlungen in Geschäftsbetrieben sind die Artikel 6 und 7 des Bundesgesetzes vom 22. März 1974</paragraph>
+    <paragraph number="para_2">Fällt eine Busse von höchstens 50 000 Franken in Betracht und würde die Ermittlung der nach Artikel 6 VStrR strafbaren Personen Untersuchungsmassnahmen bedingen, die im Hinblick auf die verwirkte Strafe unverhältnismässig wären, so kann die Behörde von einer Verfolgung dieser Personen absehen und an ihrer Stelle den Geschäftsbetrieb (Art. 7 VStrR) zur Bezahlung der Busse verurteilen.</paragraph>
+  </article>
+  <article id="art_65">
+    <number>Art. 65</number>
+    <heading>Zuständigkeit</heading>
+    <paragraph number="para_1">Die Verfolgung und die Beurteilung strafbarer Handlungen obliegen den Kantonen.</paragraph>
+    <paragraph number="para_2">Der</paragraph>
+  </article>
+  <article id="art_66">
+    <number>Art. 66</number>
+    <heading>Verfolgungsverjährung</heading>
+    <paragraph number="para">Die Strafverfolgung verjährt nach fünf Jahren.</paragraph>
+  </article>
+  <article id="art_67">
+    <number>Art. 67</number>
+    <paragraph number="para">Der Bundesrat kann Staatsverträge abschliessen betreffend: a. die internationale Zusammenarbeit zwischen Datenschutzbehörden; b. die gegenseitige Anerkennung eines angemessenen Schutzes für die Bekanntgabe von Personendaten ins Ausland.</paragraph>
+  </article>
+  <article id="art_68">
+    <number>Art. 68</number>
+    <heading>Aufhebung und Änderung anderer Erlasse</heading>
+    <paragraph number="para">Die Aufhebung und die Änderung anderer Erlasse werden im Anhang 1 geregelt.</paragraph>
+  </article>
+  <article id="art_69">
+    <number>Art. 69</number>
+    <heading>Übergangsbestimmungen betreffend laufende Bearbeitungen</heading>
+    <paragraph number="para"/>
+  </article>
+  <article id="art_70">
+    <number>Art. 70</number>
+    <heading>Übergangsbestimmung betreffend laufende Verfahren</heading>
+    <paragraph number="para">Dieses Gesetz gilt nicht für Untersuchungen des EDÖB, die im Zeitpunkt seines Inkrafttretens hängig sind; es ist ebenfalls nicht anwendbar auf hängige Beschwerden gegen erstinstanzliche Entscheide, die vor seinem Inkrafttreten ergangen sind. Diese Fälle unterstehen dem bisherigen Recht.</paragraph>
+  </article>
+  <article id="art_71">
+    <number>Art. 71</number>
+    <heading>Übergangsbestimmung betreffend Daten juristischer Personen</heading>
+    <paragraph number="para">Für Bundesorgane finden Vorschriften in anderen Bundeserlassen, die sich auf Personendaten beziehen, während fünf Jahren nach Inkrafttreten dieses Gesetzes weiter Anwendung auf Daten juristischer Personen. Insbesondere können Bundesorgane während fünf Jahren nach Inkrafttreten dieses Gesetzes Daten juristischer Personen nach Artikel 57 s Absätze 1 und 2 des Regierungs- und Verwaltungsorganisationsgesetzes vom 21. März 1997</paragraph>
+  </article>
+  <article id="art_72">
+    <number>Art. 72</number>
+    <heading>Übergangsbestimmung betreffend die Wahl und die Beendigung der Amtsdauer der oder des Beauftragten</heading>
+    <paragraph number="para_1">Die Wahl der oder des Beauftragten sowie die Beendigung ihrer oder seiner Amtsdauer unterstehen bis zum Ende der Legislaturperiode, in der dieses Gesetz in Kraft tritt, dem bisherigen Recht.</paragraph>
+    <paragraph number="para_2">Wird bei der erstmaligen Wahl der oder des Beauftragten durch die Vereinigte Bundesversammlung die bisherige Amtsinhaberin oder der bisherige Amtsinhaber gewählt, beginnt die neue Amtsdauer der oder des Beauftragten am Tag nach der Wahl.</paragraph>
+  </article>
+  <article id="art_72_a">
+    <number>Art. 72 a</number>
+    <heading>Übergangsbestimmung betreffend das Arbeitsverhältnis der oder des Beauftragten</heading>
+    <paragraph number="para">Für das Arbeitsverhältnis der oder des Beauftragten, das nach bisherigem Recht begründet worden ist, gilt das bisherige Recht.</paragraph>
+  </article>
+  <article id="art_73">
+    <number>Art. 73</number>
+    <heading>Koordination</heading>
+    <paragraph number="para">Die Koordination mit anderen Erlassen wird im Anhang 2 geregelt.</paragraph>
+  </article>
+  <article id="art_74">
+    <number>Art. 74</number>
+    <heading>Referendum und Inkrafttreten</heading>
+    <paragraph number="para_1">Dieses Gesetz untersteht dem fakultativen Referendum.</paragraph>
+    <paragraph number="para_2">Der Bundesrat bestimmt das Inkrafttreten. Inkrafttreten: 1. September 2023</paragraph>
+  </article>
+</dsg>

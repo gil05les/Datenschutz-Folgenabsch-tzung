@@ -19,12 +19,14 @@ interface AnalysisResult {
 }
 
 // Icon Components
-const ScaleIcon = () => (
+// Scales of Justice - Lucide style
+const SwissLegalIcon = () => (
   <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M16 8V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path>
-    <path d="M8 16V18a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2h-2"></path>
-    <line x1="8" y1="12" x2="8" y2="12"></line>
-    <line x1="16" y1="12" x2="16" y2="12"></line>
+    <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
+    <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
+    <path d="M7 21h10"></path>
+    <path d="M12 3v18"></path>
+    <path d="M3 7h2c2 0 5 1 7 3 2-2 5-3 7-3h2"></path>
   </svg>
 );
 
@@ -191,6 +193,8 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [model, setModel] = useState('x-ai/grok-4.1-fast:free');
+  const [availableModels, setAvailableModels] = useState<string[]>(['x-ai/grok-4.1-fast:free']);
   const [password, setPassword] = useState(() => {
     return localStorage.getItem('appPassword') || '';
   });
@@ -199,6 +203,24 @@ function App() {
     const saved = localStorage.getItem('darkMode');
     return saved ? JSON.parse(saved) : false;
   });
+
+  // Load available models from server on mount
+  useEffect(() => {
+    fetch('/api/models')
+      .then(res => res.json())
+      .then(data => {
+        if (data.models && data.models.length > 0) {
+          setAvailableModels(data.models);
+          if (data.defaultModel) {
+            setModel(data.defaultModel);
+          }
+        }
+      })
+      .catch(err => {
+        console.warn('Could not load available models:', err);
+        // Keep default model
+      });
+  }, []);
 
   useEffect(() => {
     if (darkMode) {
@@ -262,7 +284,7 @@ function App() {
           'Content-Type': 'application/json',
           'X-App-Password': password,
         },
-        body: JSON.stringify({ text, password }),
+        body: JSON.stringify({ text, password, model }),
       });
 
       if (!response.ok) {
@@ -465,7 +487,7 @@ function App() {
 
         <header>
           <div className="header-icon">
-            <ScaleIcon />
+            <SwissLegalIcon />
           </div>
           <h1>Swiss Legal Assessment</h1>
           <p>Datenschutz-Folgenabschätzung basierend auf Schweizer Recht</p>
@@ -493,21 +515,38 @@ function App() {
               />
             </div>
           )}
+          <div className="model-select-wrapper">
+            <label htmlFor="model-select" className="model-label">
+              Modell wählen
+            </label>
+            <select
+              id="model-select"
+              value={model}
+              onChange={(e) => setModel(e.target.value)}
+              className="model-select"
+            >
+              {availableModels.map((modelOption) => {
+                // Format model name for display
+                const displayName = modelOption.includes('/') 
+                  ? modelOption.split('/').map(part => part.trim()).join(' / ')
+                  : modelOption;
+                return (
+                  <option key={modelOption} value={modelOption}>
+                    {displayName}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
           <div className="textarea-wrapper">
             <textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder="Geben Sie hier den Text ein, der im Hinblick auf Schweizer Recht analysiert werden soll..."
               rows={8}
-              disabled={loading || !password}
-              className={loading ? 'loading' : ''}
+              disabled={!password}
+              readOnly={loading}
             />
-            {loading && (
-              <div className="loading-overlay">
-                <div className="spinner"></div>
-                <p>Analysiere...</p>
-              </div>
-            )}
           </div>
           <button
             onClick={handleAnalyze}

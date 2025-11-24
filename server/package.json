@@ -1,7 +1,7 @@
 {
-  "name": "ollama-assessment-server",
+  "name": "swiss-legal-assessment-server",
   "version": "1.0.0",
-  "description": "Backend server for Ollama LLM assessment",
+  "description": "Backend server for Swiss Legal Assessment using OpenRouter",
   "main": "dist/index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",

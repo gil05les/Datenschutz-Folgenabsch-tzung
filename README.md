@@ -1,43 +1,28 @@
-# Ollama LLM Assessment Application
+# Swiss Legal Assessment Application
 
-A full-stack TypeScript/React application that integrates with local Ollama LLM to provide structured text assessments with risk analysis and recommendations.
+A full-stack TypeScript/React application that integrates with OpenRouter (Grok) to provide structured Swiss legal text assessments with risk analysis and recommendations.
 
 ## Features
 
 - Clean, modern React frontend with Vite
 - Express backend with TypeScript
-- Integration with local Ollama LLM (qwen3:4b model)
+- Integration with OpenRouter API (x-ai/grok-4.1-fast model)
+- Complete Swiss Data Protection Act (DSG) context included in every analysis
 - Structured assessment output:
-  - 2-3 sentence summary
+  - 2-3 sentence summary with legal citations
   - Risk level (LOW/MEDIUM/HIGH) with color coding
-  - 3-5 improvement recommendations
-- Docker support for production deployment
-- Single-command development setup
+  - 3-5 improvement recommendations with specific legal citations
+  - Clickable legal references with links to fedlex.admin.ch
+- PDF export functionality
+- Ready for Vercel deployment
 
 ## Prerequisites
 
 - **Node.js** (v18 or higher)
 - **npm** or **yarn**
-- **Ollama** installed and running
-- **qwen3:4b model** pulled in Ollama
+- **OpenRouter API Key** (get one at https://openrouter.ai)
 
-### Installing Ollama
-
-Visit https://ollama.ai and follow the installation instructions for your platform.
-
-### Pulling the Model
-
-```bash
-ollama pull qwen3:4b
-```
-
-Verify the model is available:
-
-```bash
-ollama list
-```
-
-## Quick Start (Without Docker)
+## Quick Start
 
 1. **Set up environment variables:**
 
@@ -45,8 +30,9 @@ ollama list
 # Copy the example environment file
 cp example.env .env
 
-# Edit .env and set your password (default is "mypassword")
-# APP_PASSWORD=your-secure-password
+# Edit .env and set:
+# - APP_PASSWORD=your-secure-password
+# - OPENROUTER_API_KEY=sk-or-v1-your-key-here
 ```
 
 2. **Install dependencies:**
@@ -69,7 +55,7 @@ This will start:
 
 Visit http://localhost:5173 to use the application.
 
-**Note:** You will be prompted to enter the password (default: `mypassword`) when first using the application. The password is stored in your browser's localStorage for convenience.
+**Note:** You will be prompted to enter the password (set in `APP_PASSWORD`) when first using the application. The password is stored in your browser's localStorage for convenience.
 
 ## Available Make Commands
 
@@ -79,8 +65,6 @@ Visit http://localhost:5173 to use the application.
 - `make client` - Run frontend only (port 5173)
 - `make build` - Build both server and client for production
 - `make format` - Format code (if prettier is configured)
-- `make docker-build` - Build Docker image
-- `make docker-run` - Run Docker container
 
 ## Manual Setup
 
@@ -102,30 +86,16 @@ npm install
 npm run dev
 ```
 
-## Docker Setup
-
-See [docker-init.md](./docker-init.md) for detailed Docker instructions.
-
-Quick Docker commands:
-
-```bash
-# Build image
-make docker-build
-
-# Run container
-make docker-run
-```
-
-Then access at http://localhost:3001
-
 ## Project Structure
 
 ```
 /
 ├── Makefile              # Build and run commands
-├── Dockerfile            # Docker multi-stage build
-├── docker-init.md        # Docker setup instructions
 ├── README.md             # This file
+├── VERCEL_DEPLOYMENT.md  # Vercel deployment guide
+├── example.env           # Environment variables template
+├── example_prompts.txt   # Example prompts for testing
+├── dsg.xml               # Swiss Data Protection Act (cleaned XML)
 ├── server/               # Backend (Express + TypeScript)
 │   ├── src/
 │   │   └── index.ts      # Main server file
@@ -145,25 +115,40 @@ Then access at http://localhost:3001
 
 ### POST `/api/analyze`
 
-Analyzes text and returns structured assessment.
+Analyzes text from a Swiss legal perspective and returns structured assessment.
 
 **Request:**
 ```json
 {
-  "text": "Your text to analyze here..."
+  "text": "Your text to analyze here...",
+  "model": "x-ai/grok-4.1-fast:free",
+  "password": "your-password"
 }
+```
+
+**Headers:**
+```
+X-App-Password: your-password
 ```
 
 **Response:**
 ```json
 {
-  "summary": "2-3 sentence summary...",
+  "summary": "2-3 sentence summary with legal citations...",
   "riskLevel": "LOW | MEDIUM | HIGH",
   "analysis": "Full model output...",
   "recommendations": [
-    "Recommendation 1",
-    "Recommendation 2",
+    "Recommendation 1 with citation (Art. 5 DSG)",
+    "Recommendation 2 with citation",
     ...
+  ],
+  "legalReferences": [
+    {
+      "law": "DSG",
+      "article": "5",
+      "text": "Art. 5 DSG",
+      "url": "https://www.fedlex.admin.ch/eli/cc/2022/491/de#art_5"
+    }
   ]
 }
 ```
@@ -174,26 +159,34 @@ Create a `.env` file in the project root (copy from `example.env`):
 
 - `APP_PASSWORD` - Password to protect API endpoints (default: `mypassword`)
 - `PORT` - Server port (default: 3001)
-- `OLLAMA_HOST` - Ollama API host (default: http://localhost:11434)
+- `OPENROUTER_API_KEY` - Your OpenRouter API key (required)
+- `OPENROUTER_MODEL` - Model to use (default: `x-ai/grok-4.1-fast:free`)
+- `OPENROUTER_BASE_URL` - OpenRouter API URL (default: `https://openrouter.ai/api/v1`)
+- `OPENROUTER_APP_URL` - Your app URL for OpenRouter referrer (for production, set to your Vercel URL)
 - `NODE_ENV` - Environment mode (development/production)
 
-**Security Note:** The `.env` file is gitignored. Never commit your actual password to version control.
+**Security Note:** The `.env` file is gitignored. Never commit your actual API keys or passwords to version control.
+
+## Deployment
+
+### Vercel (Recommended)
+
+See [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) for detailed deployment instructions.
+
+Quick summary:
+1. Push code to GitHub
+2. Import project on Vercel
+3. Set environment variables
+4. Deploy!
 
 ## Troubleshooting
 
-### Cannot connect to Ollama
+### API Key Error
 
-1. Ensure Ollama is running:
-   ```bash
-   curl http://localhost:11434/api/tags
-   ```
-
-2. Verify the model is pulled:
-   ```bash
-   ollama list
-   ```
-
-3. Check `OLLAMA_HOST` environment variable if using custom configuration
+If you see "OPENROUTER_API_KEY fehlt":
+1. Check that `.env` file exists in project root
+2. Verify `OPENROUTER_API_KEY` is set correctly
+3. Restart the server after changing `.env`
 
 ### Port conflicts
 
@@ -209,6 +202,12 @@ Ensure you have the correct Node.js version (v18+):
 ```bash
 node --version
 ```
+
+### OpenRouter API Errors
+
+1. Verify your API key is valid at https://openrouter.ai
+2. Check that you have credits/quota available
+3. Verify the model name is correct (e.g., `x-ai/grok-4.1-fast:free`)
 
 ## License
 

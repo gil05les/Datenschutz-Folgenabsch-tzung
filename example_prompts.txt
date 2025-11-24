@@ -1,0 +1,14 @@
+=== PROMPT 1: NIEDRIGES RISIKO (LOW) ===
+
+Unser Unternehmen plant die Einführung einer internen Mitarbeiterverwaltungssoftware. Die Software wird ausschließlich auf unserem eigenen Server in der Schweiz betrieben. Wir speichern nur die folgenden Daten unserer Mitarbeitenden: Name, Vorname, E-Mail-Adresse, Abteilung und Eintrittsdatum. Die Daten werden nur von der Personalabteilung für interne Zwecke wie Lohnabrechnung und Urlaubsplanung verwendet. Alle Mitarbeitenden werden vor der Einführung schriftlich informiert und haben der Datenbearbeitung explizit zugestimmt. Es werden keine Daten an Dritte weitergegeben und es werden keine besonders schützenswerten Personendaten verarbeitet.
+
+
+=== PROMPT 2: MITTLERES RISIKO (MEDIUM) ===
+
+Wir möchten auf unserer Website ein Kontaktformular einrichten, über das Kunden Anfragen stellen können. Im Formular werden folgende Felder abgefragt: Name, Vorname, E-Mail-Adresse, Telefonnummer und eine Nachricht. Die Daten werden in einer Datenbank gespeichert, die auf Servern eines Schweizer Cloud-Anbieters gehostet wird. Die Daten werden intern von unserem Kundenservice-Team verwendet, um Anfragen zu beantworten. Zusätzlich planen wir, die E-Mail-Adressen für Newsletter-Marketing zu verwenden, wenn die Kunden dem zustimmen. Eine explizite Datenschutzerklärung wird auf der Website angezeigt. Es werden keine besonders schützenswerten Personendaten abgefragt, aber die Datenverarbeitung erfolgt automatisiert und die Daten werden in der Cloud gespeichert.
+
+
+=== PROMPT 3: HOHES RISIKO (HIGH) ===
+
+Unser Unternehmen entwickelt eine mobile App für Gesundheitsmonitoring. Die App sammelt folgende Daten von Nutzern: Name, Geburtsdatum, Gesundheitsdaten (Blutdruck, Puls, Gewicht, Medikamenteneinnahme), Standortdaten für Fitness-Tracking, sowie Profilbilder. Die Daten werden auf Servern eines US-amerikanischen Cloud-Anbieters (AWS) gespeichert, ohne Standardvertragsklauseln oder andere Garantien. Die App verwendet automatisiertes Profiling, um personalisierte Gesundheitsempfehlungen zu generieren. Die Daten werden auch an Werbepartner weitergegeben, um personalisierte Werbung anzuzeigen. Nutzer müssen der AGB zustimmen, aber es gibt keine separate, ausführliche Einwilligungserklärung für die Datenbearbeitung. Es werden besonders schützenswerte Personendaten (Gesundheitsdaten) verarbeitet, die App überwacht systematisch das Verhalten der Nutzer, und die Daten werden ins Ausland bekanntgegeben ohne angemessene Garantien.
+

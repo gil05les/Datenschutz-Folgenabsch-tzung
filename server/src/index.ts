@@ -2,14 +2,137 @@ import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import axios from 'axios';
 import path from 'path';
+import fs from 'fs';
 import dotenv from 'dotenv';
 
-// Load environment variables
-dotenv.config();
+// Load environment variables from project root
+// The .env file is in the project root, which is one level up from server/
+// Try multiple paths to find .env file (works in both dev and production)
+const possibleEnvPaths = [
+  path.resolve(process.cwd(), '..', '.env'),  // From server/ directory (when running via make)
+  path.resolve(__dirname, '../../.env'),       // From server/dist/ or server/src/ (compiled/dev)
+  path.resolve(process.cwd(), '.env'),         // From project root (if running from there)
+];
+
+let envPath: string | null = null;
+for (const envPathCandidate of possibleEnvPaths) {
+  if (fs.existsSync(envPathCandidate)) {
+    envPath = envPathCandidate;
+    break;
+  }
+}
+
+if (envPath) {
+  const result = dotenv.config({ path: envPath });
+  if (result.error) {
+    console.warn(`Warning: Error loading .env file from ${envPath}:`, result.error);
+  } else {
+    console.log(`Loaded environment variables from: ${envPath}`);
+  }
+} else {
+  console.warn('Warning: Could not find .env file. Using default values and environment variables.');
+  // Still try dotenv.config() in case .env is in current working directory
+  dotenv.config();
+}
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const OLLAMA_HOST = process.env.OLLAMA_HOST || 'http://localhost:11434';
+const OPENROUTER_BASE_URL = process.env.OPENROUTER_BASE_URL || 'https://openrouter.ai/api/v1';
+// Parse comma-separated models from environment variable
+const OPENROUTER_MODELS_STRING = process.env.OPENROUTER_MODEL || 'x-ai/grok-4.1-fast:free';
+const OPENROUTER_MODELS = OPENROUTER_MODELS_STRING.split(',').map(m => m.trim()).filter(Boolean);
+const OPENROUTER_MODEL = OPENROUTER_MODELS[0] || 'x-ai/grok-4.1-fast:free'; // Default model (first one)
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+const OPENROUTER_APP_URL = process.env.OPENROUTER_APP_URL || process.env.VERCEL_URL || 'http://localhost:3001';
+
+// --- Lightweight DSG retrieval setup (RAG) ---
+type DsgArticle = {
+  id: string;
+  heading: string;
+  text: string;
+};
+
+const DSG_XML_PATH = path.resolve(__dirname, '../../dsg.xml');
+
+const stripTags = (html: string): string => html.replace(/<[^>]+>/g, ' ');
+
+const tokenize = (value: string): string[] =>
+  (value.toLowerCase().match(/[a-zäöüöäß]+/gi) || []).map((t) => t.trim()).filter(Boolean);
+
+const extractDsgArticles = (xml: string): DsgArticle[] => {
+  const articles: DsgArticle[] = [];
+  const articleRegex = /<article[^>]*>([\s\S]*?)<\/article>/gi;
+  let match;
+
+  while ((match = articleRegex.exec(xml)) !== null) {
+    const articleBlock = match[1];
+    
+    // Try new format first: <number>Art. X</number>
+    let numMatch = articleBlock.match(/<number>([\s\S]*?)<\/number>/i);
+    // Fallback to old format: <num><b>Art. X</b></num>
+    if (!numMatch) {
+      numMatch = articleBlock.match(/<num><b>(Art\.\s*[^<]+)<\/b><\/num>/i);
+    }
+    
+    const headingMatch = articleBlock.match(/<heading>([\s\S]*?)<\/heading>/i);
+
+    const id = numMatch ? stripTags(numMatch[1]).trim() : 'Unbekannt';
+    const heading = headingMatch ? stripTags(headingMatch[1]).trim() : 'Ohne Titel';
+    
+    // Extract all paragraph text for better context
+    const paragraphTexts: string[] = [];
+    const paragraphRegex = /<paragraph[^>]*>([\s\S]*?)<\/paragraph>/gi;
+    let paraMatch;
+    while ((paraMatch = paragraphRegex.exec(articleBlock)) !== null) {
+      const paraText = stripTags(paraMatch[1]).replace(/\s+/g, ' ').trim();
+      if (paraText) {
+        paragraphTexts.push(paraText);
+      }
+    }
+    
+    // Use paragraph texts if available, otherwise use all text
+    const text = paragraphTexts.length > 0 
+      ? paragraphTexts.join(' ')
+      : stripTags(articleBlock).replace(/\s+/g, ' ').trim();
+
+    articles.push({ id, heading, text });
+  }
+
+  return articles;
+};
+
+const loadDsgArticles = (): DsgArticle[] => {
+  try {
+    const xml = fs.readFileSync(DSG_XML_PATH, 'utf-8');
+    return extractDsgArticles(xml);
+  } catch (err) {
+    console.warn('Konnte dsg.xml nicht laden, RAG deaktiviert:', err);
+    return [];
+  }
+};
+
+const DSG_ARTICLES = loadDsgArticles();
+
+const retrieveDsgContext = (query: string, limit = 5): DsgArticle[] => {
+  if (!DSG_ARTICLES.length) return [];
+  const queryTokens = tokenize(query);
+  if (!queryTokens.length) return [];
+
+  const scores = DSG_ARTICLES.map((article) => {
+    const articleTokens = new Set(tokenize(article.text));
+    let overlap = 0;
+    queryTokens.forEach((token) => {
+      if (articleTokens.has(token)) overlap += 1;
+    });
+    return { article, score: overlap };
+  });
+
+  return scores
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map(({ article }) => article);
+};
 
 // Middleware
 app.use(cors());
@@ -24,7 +147,12 @@ const passwordMiddleware = (req: Request, res: Response, next: NextFunction) => 
     return next();
   }
 
-  // Check password for API endpoints
+  // Skip password check for public endpoints (models list)
+  if (req.path === '/api/models') {
+    return next();
+  }
+
+  // Check password for other API endpoints
   if (req.path.startsWith('/api')) {
     const providedPassword = req.headers['x-app-password'] || req.body?.password;
     
@@ -149,7 +277,19 @@ const extractLegalReferences = (text: string): LegalReference[] => {
 };
 
 // Prompt template for structured assessment focused on Swiss law
-const createPrompt = (userText: string): string => {
+const createPrompt = (userText: string, dsgContext: DsgArticle[]): string => {
+  const contextText =
+    dsgContext && dsgContext.length > 0
+      ? dsgContext
+          .map(
+            (a) =>
+              `${a.id}${a.heading ? ` – ${a.heading}` : ''}: ${a.text
+                .replace(/\s+/g, ' ')
+                .trim()}`
+          )
+          .join('\n\n')
+      : 'Kein zusätzlicher DSG-Kontext verfügbar.';
+
   return `You are an expert legal evaluator specializing in Swiss law. Analyse the following input text strictly from the perspective of Swiss legal framework, including but not limited to:
 
 - Swiss Federal Constitution (Bundesverfassung, BV, SR 101)
@@ -169,6 +309,9 @@ LANGUAGE REQUIREMENT: Write every part of the assessment (summary, risk justific
 1. Provide a concise 2–3 sentence summary from a Swiss legal perspective, including specific legal citations.
 2. Give a risk assessment: LOW, MEDIUM or HIGH based on compliance with Swiss law. Include a one-sentence justification with EXACT legal citations (e.g., "Art. 5 DSG").
 3. Provide 3–5 improvement recommendations as bullet points, each with specific Swiss legal citations in the format "Art. X [LAW]" or "Art. X Abs. Y [LAW]".
+
+Kontext aus DSG (automatisch ausgewählte Passagen, bitte berücksichtigen):
+${contextText}
 
 Text to analyse:
 
@@ -224,31 +367,60 @@ const parseResponse = (response: string): {
   };
 };
 
+// API endpoint to get available models
+app.get('/api/models', (req: Request, res: Response) => {
+  res.json({
+    models: OPENROUTER_MODELS,
+    defaultModel: OPENROUTER_MODEL
+  });
+});
+
 // API endpoint for text analysis
 app.post('/api/analyze', async (req: Request, res: Response) => {
   try {
-    const { text } = req.body;
+    const { text, model } = req.body;
     
     if (!text || typeof text !== 'string' || text.trim().length === 0) {
       return res.status(400).json({ error: 'Text input is required' });
     }
     
-    const prompt = createPrompt(text);
+    // Check if OpenRouter API key is configured
+    if (!OPENROUTER_API_KEY) {
+      return res.status(503).json({ 
+        error: 'OPENROUTER_API_KEY fehlt – Bitte setzen Sie OPENROUTER_API_KEY in Ihrer Umgebungsvariablen.' 
+      });
+    }
     
-    // Call Ollama API
-    const ollamaResponse = await axios.post(
-      `${OLLAMA_HOST}/api/generate`,
+    // Retrieve DSG articles - always include ALL articles for comprehensive context
+    const dsgContext = DSG_ARTICLES; // Include ALL 77 articles every time
+    const prompt = createPrompt(text, dsgContext);
+    const requestedModel = typeof model === 'string' && model.trim().length > 0 
+      ? model.trim() 
+      : OPENROUTER_MODEL;
+
+    console.log(`Using OpenRouter with model: ${requestedModel}`);
+
+    // Call OpenRouter API
+    const openRouterResponse = await axios.post(
+      `${OPENROUTER_BASE_URL}/chat/completions`,
       {
-        model: 'qwen3:4b',
-        prompt: prompt,
-        stream: false
+        model: requestedModel,
+        messages: [
+          { role: 'user', content: prompt }
+        ],
+        temperature: 0.2
       },
       {
-        timeout: 60000 // 60 second timeout
+        timeout: 120000,
+        headers: {
+          Authorization: `Bearer ${OPENROUTER_API_KEY}`,
+          'HTTP-Referer': OPENROUTER_APP_URL,
+          'X-Title': 'Swiss Legal Assessment'
+        }
       }
     );
     
-    const modelResponse = ollamaResponse.data.response || '';
+    const modelResponse = openRouterResponse.data?.choices?.[0]?.message?.content || '';
     const parsed = parseResponse(modelResponse);
     
     res.json({
@@ -264,13 +436,13 @@ app.post('/api/analyze', async (req: Request, res: Response) => {
     
     if (error.code === 'ECONNREFUSED') {
       return res.status(503).json({ 
-        error: 'Cannot connect to Ollama. Please ensure Ollama is running and the model is pulled (ollama pull qwen3:4b)' 
+        error: 'Cannot connect to OpenRouter. Please verify OPENROUTER_BASE_URL and API key.' 
       });
     }
     
     if (error.response) {
       return res.status(500).json({ 
-        error: `Ollama API error: ${error.response.data?.error || error.message}` 
+        error: `OpenRouter API error: ${error.response.data?.error?.message || error.response.data?.error || error.message}` 
       });
     }
     
@@ -288,7 +460,22 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Ollama host: ${OLLAMA_HOST}`);
-});
+if (process.env.NODE_ENV !== 'production' || process.env.VERCEL !== '1') {
+  // Only start Express server if not on Vercel (Vercel handles this automatically)
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    
+    if (OPENROUTER_API_KEY) {
+      console.log(`OpenRouter configured: ${OPENROUTER_BASE_URL}`);
+      console.log(`OpenRouter available models: ${OPENROUTER_MODELS.join(', ')}`);
+      console.log(`OpenRouter default model: ${OPENROUTER_MODEL}`);
+      console.log(`OpenRouter app URL: ${OPENROUTER_APP_URL}`);
+      console.log('OpenRouter is ready for use.');
+    } else {
+      console.warn('⚠️  WARNING: OPENROUTER_API_KEY not set. API calls will fail.');
+    }
+  });
+}
+
+// Export for Vercel serverless functions
+export default app;
