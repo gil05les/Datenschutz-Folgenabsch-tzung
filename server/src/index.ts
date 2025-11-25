@@ -304,9 +304,31 @@ WICHTIG: Alle Ausführungen müssen auf Schweizer Recht basieren, insbesondere:
 KRITISCH: Bei Rechtsverweisen MÜSSEN Sie das exakte Format verwenden: "Art. [Nummer] [Gesetzesabkürzung]" oder "Art. [Nummer] Abs. [Absatz] [Gesetzesabkürzung]"
 Beispiele: "Art. 22 DSG", "Art. 5 Abs. 2 ZGB", "Art. 28 OR"
 
-SPRACHE: Alle Ausführungen müssen vollständig auf Deutsch verfasst sein. Die Strukturlabels (ZUSAMMENFASSUNG, BESCHREIBUNG, BRUTTORISIKEN, MASSNAHMEN, NETTORISIKEN, ERGEBNIS, RISK_LEVEL) müssen exakt beibehalten werden.
+SPRACHE: Alle Ausführungen müssen vollständig auf Deutsch verfasst sein. Die Strukturlabels (INFORMATIONEN_FEHLEN, FEHLENDE_INFORMATIONEN, FREUNDLICHE_NACHRICHT, ZUSAMMENFASSUNG, BESCHREIBUNG, BRUTTORISIKEN, MASSNAHMEN, NETTORISIKEN, ERGEBNIS, RISK_LEVEL) müssen exakt beibehalten werden.
 
-Erstelle eine strukturierte DSFA gemäss EDÖB-Standard:
+ERSTE PRÜFUNG: Bevor du die DSFA erstellst, prüfe zuerst, ob im bereitgestellten Text alle erforderlichen Informationen vorhanden sind:
+
+Erforderliche Informationen für eine vollständige DSFA:
+- Zweck der Datenbearbeitung (warum werden die Daten bearbeitet?)
+- Art der betroffenen Personen (Mitarbeitende, Kunden, Patienten, etc.)
+- Datenkategorien (welche Personendaten, gibt es besonders schützenswerte Daten gemäss Art. 5 DSG?)
+- Umfang der Datenbearbeitung (wie viele Personen, Datenvolumen, Dauer)
+- Technische Umsetzung (Wo werden Daten gespeichert? Welche Technologien werden verwendet? Cloud, lokaler Server?)
+- Rechtliche Grundlage bzw. Rechtfertigungsgrund (Einwilligung, überwiegendes Interesse, etc.)
+
+FALLS INFORMATIONEN FEHLEN:
+Antworte NUR mit folgendem Format (überspringe alle anderen Abschnitte):
+
+INFORMATIONEN_FEHLEN: true
+FREUNDLICHE_NACHRICHT: [Eine freundliche, hilfreiche Nachricht auf Deutsch, die dem Benutzer erklärt, dass für eine vollständige DSFA noch zusätzliche Informationen benötigt werden. Sei konstruktiv und erkläre den Nutzen dieser Informationen.]
+FEHLENDE_INFORMATIONEN:
+- [Spezifische fehlende Information 1 - z.B. "Zweck der Datenbearbeitung nicht klar erkennbar"]
+- [Spezifische fehlende Information 2 - z.B. "Art der betroffenen Personen nicht angegeben"]
+- [Spezifische fehlende Information 3 - z.B. "Technische Umsetzung (Cloud/Server) nicht beschrieben"]
+- [Weitere spezifische fehlende Informationen...]
+
+FALLS ALLE INFORMATIONEN VORHANDEN SIND:
+Erstelle die vollständige strukturierte DSFA gemäss EDÖB-Standard:
 
 1. ZUSAMMENFASSUNG: Eine prägnante 2-3 Sätze Zusammenfassung der geplanten Datenbearbeitung mit rechtlichen Einordnungen und Zitaten.
 
@@ -445,6 +467,49 @@ const cleanMarkdown = (text: string): string => {
     .trim();
 };
 
+// Parse response to check if information is missing
+const parseMissingInfo = (response: string): {
+  needsMoreInfo: boolean;
+  missingInfo?: string[];
+  message?: string;
+} => {
+  // Check if response indicates missing information
+  const infoFehltMatch = response.match(/INFORMATIONEN_FEHLEN:\s*(true|yes|ja)/i);
+  const needsMoreInfo = !!infoFehltMatch;
+
+  if (!needsMoreInfo) {
+    return { needsMoreInfo: false };
+  }
+
+  // Extract friendly message
+  const messageMatch = response.match(/FREUNDLICHE_NACHRICHT:\s*(.+?)(?=(?:FEHLENDE_INFORMATIONEN|$))/is);
+  const message = messageMatch ? cleanMarkdown(messageMatch[1].trim()) : undefined;
+
+  // Extract missing information list
+  const missingInfoMatch = response.match(/FEHLENDE_INFORMATIONEN:\s*([\s\S]+?)(?=(?:INFORMATIONEN_FEHLEN|ZUSAMMENFASSUNG|BESCHREIBUNG|RISK_LEVEL|$))/i);
+  let missingInfo: string[] = [];
+
+  if (missingInfoMatch) {
+    const missingInfoText = missingInfoMatch[1];
+    missingInfo = missingInfoText
+      .split('\n')
+      .map(line => {
+        // Remove leading dashes, bullets, numbers
+        line = line.replace(/^[-•*]\s*/, '');
+        line = line.replace(/^[\d]+[\.\)]\s*/, '');
+        line = line.trim();
+        return line;
+      })
+      .filter(line => line.length > 0 && !line.match(/^(FEHLENDE_INFORMATIONEN|INFORMATIONEN_FEHLEN):/i));
+  }
+
+  return {
+    needsMoreInfo: true,
+    missingInfo: missingInfo.length > 0 ? missingInfo : undefined,
+    message: message || 'Für eine vollständige DSFA benötigen wir noch zusätzliche Informationen.'
+  };
+};
+
 // Parse the model response to extract structured DSFA data
 const parseResponse = (response: string): {
   summary: string;
@@ -457,8 +522,26 @@ const parseResponse = (response: string): {
   massnahmen?: string;
   nettorisiken?: string;
   ergebnis?: string;
+  needsMoreInfo?: boolean;
+  missingInfo?: string[];
+  message?: string;
 } => {
   const analysis = response;
+  
+  // First check if information is missing
+  const missingInfoCheck = parseMissingInfo(response);
+  if (missingInfoCheck.needsMoreInfo) {
+    return {
+      summary: '',
+      riskLevel: 'UNKNOWN',
+      analysis: response,
+      recommendations: [],
+      legalReferences: [],
+      needsMoreInfo: true,
+      missingInfo: missingInfoCheck.missingInfo,
+      message: missingInfoCheck.message
+    };
+  }
   
   // Extract summary (either old format "SUMMARY:" or new format "ZUSAMMENFASSUNG:")
   const summaryMatch = response.match(/(?:SUMMARY|ZUSAMMENFASSUNG):\s*(.+?)(?=(?:BESCHREIBUNG|DESCRIPTION|BRUTTORISIKEN|RISK_LEVEL|$))/is);
@@ -561,7 +644,8 @@ const parseResponse = (response: string): {
     bruttorisiken,
     massnahmen,
     nettorisiken,
-    ergebnis
+    ergebnis,
+    needsMoreInfo: false
   };
 };
 
@@ -659,7 +743,11 @@ app.post('/api/analyze', async (req: Request, res: Response) => {
       bruttorisiken: parsed.bruttorisiken,
       massnahmen: parsed.massnahmen,
       nettorisiken: parsed.nettorisiken,
-      ergebnis: parsed.ergebnis
+      ergebnis: parsed.ergebnis,
+      // Missing info fields
+      needsMoreInfo: parsed.needsMoreInfo || false,
+      missingInfo: parsed.missingInfo,
+      message: parsed.message
     });
     
   } catch (error: any) {

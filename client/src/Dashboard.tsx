@@ -23,6 +23,10 @@ interface AnalysisResult {
   massnahmen?: string;
   nettorisiken?: string;
   ergebnis?: string;
+  // Missing info fields
+  needsMoreInfo?: boolean;
+  missingInfo?: string[];
+  message?: string;
 }
 
 // Icon Components
@@ -216,6 +220,10 @@ function Dashboard() {
     const saved = localStorage.getItem('darkMode');
     return saved ? JSON.parse(saved) : false;
   });
+  // Missing info state
+  const [needsMoreInfo, setNeedsMoreInfo] = useState(false);
+  const [missingInfo, setMissingInfo] = useState<string[]>([]);
+  const [infoMessage, setInfoMessage] = useState<string>('');
 
   const handleLogout = () => {
     localStorage.removeItem('appPassword');
@@ -299,6 +307,9 @@ function Dashboard() {
     setLoading(true);
     setError(null);
     setResult(null);
+    setNeedsMoreInfo(false);
+    setMissingInfo([]);
+    setInfoMessage('');
 
     try {
       const response = await fetch('/api/analyze', {
@@ -320,9 +331,24 @@ function Dashboard() {
       }
 
       const data = await response.json();
-      setResult(data);
+      
+      // Check if more information is needed
+      if (data.needsMoreInfo) {
+        setNeedsMoreInfo(true);
+        setMissingInfo(data.missingInfo || []);
+        setInfoMessage(data.message || 'Für eine vollständige DSFA benötigen wir noch zusätzliche Informationen.');
+        setResult(null);
+      } else {
+        setNeedsMoreInfo(false);
+        setMissingInfo([]);
+        setInfoMessage('');
+        setResult(data);
+      }
     } catch (err: any) {
       setError(err.message || 'An error occurred while analyzing the text');
+      setNeedsMoreInfo(false);
+      setMissingInfo([]);
+      setInfoMessage('');
     } finally {
       setLoading(false);
     }
@@ -653,7 +679,61 @@ function Dashboard() {
           </div>
         )}
 
-        {result && (
+        {needsMoreInfo && (
+          <div className="missing-info-view animate-fade-in">
+            <div className="missing-info-header">
+              <div className="missing-info-icon">
+                <LightbulbIcon />
+              </div>
+              <h2>Zusätzliche Informationen erforderlich</h2>
+            </div>
+            
+            {infoMessage && (
+              <div className="missing-info-message">
+                {infoMessage}
+              </div>
+            )}
+            
+            {missingInfo.length > 0 && (
+              <div className="missing-info-list-section">
+                <h3>Folgende Informationen werden noch benötigt:</h3>
+                <ul className="missing-info-list">
+                  {missingInfo.map((item, index) => (
+                    <li key={index} className="missing-info-item">
+                      <span className="missing-info-checkbox">☐</span>
+                      <span className="missing-info-text">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            
+            <div className="missing-info-actions">
+              <p className="missing-info-hint">
+                Bitte ergänzen Sie den Text mit den fehlenden Informationen und klicken Sie dann auf "Erneut analysieren".
+              </p>
+              <button
+                onClick={handleAnalyze}
+                disabled={loading || !text.trim() || !password}
+                className={`analyze-button re-analyze-button ${loading ? 'loading' : ''}`}
+              >
+                {loading ? (
+                  <>
+                    <span className="button-spinner"></span>
+                    <span>Analysiere...</span>
+                  </>
+                ) : (
+                  <>
+                    <SearchIcon />
+                    <span>Erneut analysieren</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {result && !needsMoreInfo && (
           <div className="results animate-fade-in">
             <div className="result-section scroll-animate">
               <div className="section-header">

@@ -1,0 +1,16 @@
+=== UNVOLLSTÄNDIGER PROMPT ZUM TESTEN ===
+
+Unser Unternehmen möchte eine neue Software einführen. Wir haben bereits einige Mitarbeiter und möchten diese Software für interne Zwecke verwenden. Die Daten werden in der Cloud gespeichert und wir haben bereits einen Anbieter gefunden, der uns dabei helfen kann.
+
+=== ENDE UNVOLLSTÄNDIGER PROMPT ===
+
+Hinweis: Dieser Prompt fehlt wichtige Informationen für eine DSFA:
+- Zweck der Datenbearbeitung ist unklar (was genau macht die Software?)
+- Art der betroffenen Personen ist nicht spezifisch (nur "einige Mitarbeiter")
+- Datenkategorien fehlen komplett (welche Daten werden verarbeitet?)
+- Umfang ist unklar (wie viele Personen genau?)
+- Technische Umsetzung ist vage (welche Cloud, welche Anbieter?)
+- Rechtliche Grundlage fehlt komplett
+
+Dieser Prompt sollte die MissingInfoView auslösen.
+

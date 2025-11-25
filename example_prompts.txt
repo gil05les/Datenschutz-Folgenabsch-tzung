@@ -13,3 +13,18 @@ Wir möchten auf unserer Website ein Kontaktformular einrichten, über das Kunde
 Unser Unternehmen entwickelt eine mobile App für Gesundheitsmonitoring. Die App sammelt folgende Daten von Nutzern: Name, Geburtsdatum, Gesundheitsdaten (Blutdruck, Puls, Gewicht, Medikamenteneinnahme), Standortdaten für Fitness-Tracking, sowie Profilbilder. Die Daten werden auf Servern eines US-amerikanischen Cloud-Anbieters (AWS) gespeichert, ohne Standardvertragsklauseln oder andere Garantien. Die App verwendet automatisiertes Profiling, um personalisierte Gesundheitsempfehlungen zu generieren. Die Daten werden auch an Werbepartner weitergegeben, um personalisierte Werbung anzuzeigen. Nutzer müssen der AGB zustimmen, aber es gibt keine separate, ausführliche Einwilligungserklärung für die Datenbearbeitung. Es werden besonders schützenswerte Personendaten (Gesundheitsdaten) verarbeitet, die App überwacht systematisch das Verhalten der Nutzer, und die Daten werden ins Ausland bekanntgegeben ohne angemessene Garantien.
 
 
+=== PROMPT 4: UNVOLLSTÄNDIGER PROMPT (ZUM TESTEN) ===
+
+Unser Unternehmen möchte eine neue Software einführen. Wir haben bereits einige Mitarbeiter und möchten diese Software für interne Zwecke verwenden. Die Daten werden in der Cloud gespeichert und wir haben bereits einen Anbieter gefunden, der uns dabei helfen kann.
+
+HINWEIS: Dieser Prompt fehlt absichtlich wichtige Informationen:
+- Zweck der Datenbearbeitung ist unklar (was genau macht die Software?)
+- Art der betroffenen Personen ist nicht spezifisch (nur "einige Mitarbeiter")
+- Datenkategorien fehlen komplett (welche Daten werden verarbeitet?)
+- Umfang ist unklar (wie viele Personen genau?)
+- Technische Umsetzung ist vage (welche Cloud, welche Anbieter?)
+- Rechtliche Grundlage fehlt komplett
+
+Dieser Prompt sollte die MissingInfoView auslösen und nach den fehlenden Informationen fragen.
+
+
