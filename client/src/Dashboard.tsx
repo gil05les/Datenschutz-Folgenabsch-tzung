@@ -17,6 +17,12 @@ interface AnalysisResult {
   analysis: string;
   recommendations: string[];
   legalReferences: LegalReference[];
+  // New DSFA structure fields
+  description?: string;
+  bruttorisiken?: string;
+  massnahmen?: string;
+  nettorisiken?: string;
+  ergebnis?: string;
 }
 
 // Icon Components
@@ -364,6 +370,24 @@ function Dashboard() {
       cursorY += lineHeight;
     };
 
+    // Helper function to clean markdown from text
+    const cleanMarkdown = (text: string): string => {
+      if (!text) return text;
+      return text
+        // Remove bold/italic markdown
+        .replace(/\*\*([^*]+)\*\*/g, '$1')
+        .replace(/\*([^*]+)\*/g, '$1')
+        .replace(/_([^_]+)_/g, '$1')
+        // Remove code blocks
+        .replace(/```[\s\S]*?```/g, '')
+        .replace(/`([^`]+)`/g, '$1')
+        // Remove headers
+        .replace(/^#{1,6}\s+/gm, '')
+        // Clean up extra whitespace
+        .replace(/\n{3,}/g, '\n\n')
+        .trim();
+    };
+
     const addParagraph = (textValue: string) => {
       if (!textValue?.trim()) {
         return;
@@ -371,15 +395,23 @@ function Dashboard() {
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(12);
       doc.setTextColor(26, 46, 58);
-      const lines = doc.splitTextToSize(textValue.trim(), contentWidth);
+      const cleanedText = cleanMarkdown(textValue.trim());
+      const lines = doc.splitTextToSize(cleanedText, contentWidth);
       writeLines(lines);
       cursorY += 6;
     };
 
     const addMultilineBlock = (textValue: string) => {
-      textValue
+      const cleanedText = cleanMarkdown(textValue);
+      cleanedText
         .split(/\n+/)
-        .map((paragraph) => paragraph.trim())
+        .map((paragraph) => {
+          // Remove leading markers that might remain
+          paragraph = paragraph.replace(/^[\d]+[\.\)]\s*/, '');
+          paragraph = paragraph.replace(/^[\(][a-zA-Z][\)]\s*/, '');
+          paragraph = paragraph.replace(/^[-•*]\s*/, '');
+          return paragraph.trim();
+        })
         .filter(Boolean)
         .forEach(addParagraph);
     };
@@ -390,6 +422,17 @@ function Dashboard() {
       }
 
       items.forEach((item, index) => {
+        // Clean markdown from item
+        let cleanedItem = cleanMarkdown(item);
+        
+        // Remove leading numbers, bullets, or other markers that might be left
+        cleanedItem = cleanedItem.replace(/^[\d]+[\.\)]\s*/, '');
+        cleanedItem = cleanedItem.replace(/^[\(][a-zA-Z][\)]\s*/, '');
+        cleanedItem = cleanedItem.replace(/^[-•*]\s*/, '');
+        cleanedItem = cleanedItem.trim();
+        
+        if (!cleanedItem) return;
+        
         ensureSpace();
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(12);
@@ -397,7 +440,7 @@ function Dashboard() {
         doc.text(`${index + 1}.`, marginX, cursorY);
         doc.setFont('helvetica', 'normal');
         doc.setTextColor(26, 46, 58);
-        const lines = doc.splitTextToSize(item, contentWidth - 30);
+        const lines = doc.splitTextToSize(cleanedItem, contentWidth - 30);
         let lineCursor = cursorY;
         lines.forEach((line: string, lineIndex: number) => {
           if (lineIndex > 0) {
@@ -430,6 +473,32 @@ function Dashboard() {
 
     addSectionTitle('Zusammenfassung');
     addParagraph(result.summary);
+
+    // DSFA Structure Sections in PDF
+    if (result.description) {
+      addSectionTitle('Beschreibung der geplanten Bearbeitung');
+      addMultilineBlock(result.description);
+    }
+
+    if (result.bruttorisiken) {
+      addSectionTitle('Potentiell hohe Bruttorisiken');
+      addMultilineBlock(result.bruttorisiken);
+    }
+
+    if (result.massnahmen) {
+      addSectionTitle('Geplante Massnahmen zur Senkung der Bruttorisiken');
+      addMultilineBlock(result.massnahmen);
+    }
+
+    if (result.nettorisiken) {
+      addSectionTitle('Verbleibende Nettorisiken');
+      addMultilineBlock(result.nettorisiken);
+    }
+
+    if (result.ergebnis) {
+      addSectionTitle('Ergebnis');
+      addMultilineBlock(result.ergebnis);
+    }
 
     const riskStyles: Record<
       AnalysisResult['riskLevel'],
@@ -597,6 +666,77 @@ function Dashboard() {
                 <TextWithCitations text={result.summary} references={result.legalReferences || []} />
               </p>
             </div>
+
+            {/* DSFA Structure Sections - shown if available */}
+            {result.description && (
+              <div className="result-section scroll-animate">
+                <div className="section-header">
+                  <div className="section-icon">
+                    <FileIcon />
+                  </div>
+                  <h2>Beschreibung der geplanten Bearbeitung</h2>
+                </div>
+                <div className="summary-text">
+                  <TextWithCitations text={result.description} references={result.legalReferences || []} />
+                </div>
+              </div>
+            )}
+
+            {result.bruttorisiken && (
+              <div className="result-section scroll-animate">
+                <div className="section-header">
+                  <div className="section-icon">
+                    <WarningIcon />
+                  </div>
+                  <h2>Potentiell hohe Bruttorisiken</h2>
+                </div>
+                <div className="summary-text">
+                  <TextWithCitations text={result.bruttorisiken} references={result.legalReferences || []} />
+                </div>
+              </div>
+            )}
+
+            {result.massnahmen && (
+              <div className="result-section scroll-animate">
+                <div className="section-header">
+                  <div className="section-icon">
+                    <ShieldIcon />
+                  </div>
+                  <h2>Geplante Massnahmen zur Senkung der Bruttorisiken</h2>
+                </div>
+                <div className="summary-text">
+                  <TextWithCitations text={result.massnahmen} references={result.legalReferences || []} />
+                </div>
+              </div>
+            )}
+
+            {result.nettorisiken && (
+              <div className="result-section scroll-animate">
+                <div className="section-header">
+                  <div className="section-icon">
+                    <AlertIcon />
+                  </div>
+                  <h2>Verbleibende Nettorisiken</h2>
+                </div>
+                <div className="summary-text">
+                  <TextWithCitations text={result.nettorisiken} references={result.legalReferences || []} />
+                </div>
+              </div>
+            )}
+
+            {result.ergebnis && (
+              <div className="result-section scroll-animate">
+                <div className="section-header">
+                  <div className="section-icon">
+                    <CheckIcon />
+                  </div>
+                  <h2>Ergebnis</h2>
+                </div>
+                <div className="summary-text">
+                  <TextWithCitations text={result.ergebnis} references={result.legalReferences || []} />
+                </div>
+              </div>
+            )}
 
             <div className="result-section scroll-animate">
               <div className="section-header">

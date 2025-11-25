@@ -32,7 +32,7 @@ if (envPath) {
 } else {
   console.warn('Warning: Could not find .env file. Using default values and environment variables.');
   // Still try dotenv.config() in case .env is in current working directory
-  dotenv.config();
+dotenv.config();
 }
 
 const app = express();
@@ -277,7 +277,7 @@ const extractLegalReferences = (text: string): LegalReference[] => {
   return uniqueRefs;
 };
 
-// Prompt template for structured assessment focused on Swiss law
+// Prompt template for structured DSFA according to EDÖB guidelines
 const createPrompt = (userText: string, dsgContext: DsgArticle[]): string => {
   const contextText =
     dsgContext && dsgContext.length > 0
@@ -291,70 +291,262 @@ const createPrompt = (userText: string, dsgContext: DsgArticle[]): string => {
           .join('\n\n')
       : 'Kein zusätzlicher DSG-Kontext verfügbar.';
 
-  return `You are an expert legal evaluator specializing in Swiss law. Analyse the following input text strictly from the perspective of Swiss legal framework, including but not limited to:
+  return `Du bist ein Experte für Datenschutzrecht in der Schweiz und erstellst eine Datenschutz-Folgenabschätzung (DSFA) gemäss den Art. 22 und 23 DSG sowie dem Merkblatt des Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB).
 
-- Swiss Federal Constitution (Bundesverfassung, BV, SR 101)
-- Swiss Civil Code (Zivilgesetzbuch, ZGB, SR 210)
-- Swiss Code of Obligations (Obligationenrecht, OR, SR 220)
-- Swiss Data Protection Act (Datenschutzgesetz, DSG, SR 235.1)
-- Swiss Penal Code (Strafgesetzbuch, StGB, SR 311.0)
-- Relevant cantonal laws where applicable
+WICHTIG: Alle Ausführungen müssen auf Schweizer Recht basieren, insbesondere:
+- Bundesverfassung (BV, SR 101)
+- Datenschutzgesetz (DSG, SR 235.1)
+- Zivilgesetzbuch (ZGB, SR 210)
+- Obligationenrecht (OR, SR 220)
+- Strafgesetzbuch (StGB, SR 311.0)
+- Relevante kantonale Gesetze
 
-IMPORTANT: Only provide assessments based on Swiss law. If the text relates to legal matters outside Switzerland, note that your assessment is limited to Swiss legal perspective.
+KRITISCH: Bei Rechtsverweisen MÜSSEN Sie das exakte Format verwenden: "Art. [Nummer] [Gesetzesabkürzung]" oder "Art. [Nummer] Abs. [Absatz] [Gesetzesabkürzung]"
+Beispiele: "Art. 22 DSG", "Art. 5 Abs. 2 ZGB", "Art. 28 OR"
 
-CRITICAL: When referencing Swiss laws, you MUST cite them in the exact format: "Art. [number] [law abbreviation]" or "Art. [number] Abs. [paragraph] [law abbreviation]"
-Examples: "Art. 5 DSG", "Art. 12 Abs. 1 ZGB", "Art. 28 OR", "Art. 13 BV"
+SPRACHE: Alle Ausführungen müssen vollständig auf Deutsch verfasst sein. Die Strukturlabels (ZUSAMMENFASSUNG, BESCHREIBUNG, BRUTTORISIKEN, MASSNAHMEN, NETTORISIKEN, ERGEBNIS, RISK_LEVEL) müssen exakt beibehalten werden.
 
-LANGUAGE REQUIREMENT: Write every part of the assessment (summary, risk justification, recommendations, and any explanations) exclusively in German. Do not switch languages. Keep the structural labels (SUMMARY, RISK_LEVEL, JUSTIFICATION, RECOMMENDATIONS) exactly as specified below, but ensure the content that follows each label is fully German.
+Erstelle eine strukturierte DSFA gemäss EDÖB-Standard:
 
-1. Provide a concise 2–3 sentence summary from a Swiss legal perspective, including specific legal citations.
-2. Give a risk assessment: LOW, MEDIUM or HIGH based on compliance with Swiss law. Include a one-sentence justification with EXACT legal citations (e.g., "Art. 5 DSG").
-3. Provide 3–5 improvement recommendations as bullet points, each with specific Swiss legal citations in the format "Art. X [LAW]" or "Art. X Abs. Y [LAW]".
+1. ZUSAMMENFASSUNG: Eine prägnante 2-3 Sätze Zusammenfassung der geplanten Datenbearbeitung mit rechtlichen Einordnungen und Zitaten.
 
-Kontext aus DSG (automatisch ausgewählte Passagen, bitte berücksichtigen):
+2. BESCHREIBUNG DER GE PLANTEN BEARBEITUNG:
+- Zweck der Datenbearbeitung
+- Art der betroffenen Personen
+- Datenkategorien (Personendaten, besonders schützenswerte Daten gemäss Art. 5 DSG)
+- Umfang der Datenbearbeitung
+- Technische Umsetzung und verwendete Technologien
+- Rechtliche Grundlage bzw. Rechtfertigungsgrund
+Prüfe insbesondere die Kriterien nach Art. 22 Abs. 2 DSG:
+  - Art der Bearbeitung
+  - Umfang der Bearbeitung
+  - Umstände der Bearbeitung
+  - Zweck der Bearbeitung
+  - Absolute Kriterien (Art. 22 Abs. 2 Bst. a/b DSG): umfangreiche Bearbeitung besonders schützenswerter Daten oder systematische umfangreiche Überwachung öffentlicher Bereiche
+
+3. POTENTIELL HOHE BRUTTORISIKEN (vor Massnahmen):
+Analysiere die Risiken für die primären Schutzobjekte:
+  a) Primärrisiken für Privatsphäre und informationelle Selbstbestimmung der Betroffenen
+     - Einschränkung der Verfügungsfreiheit über eigene Daten
+     - Verletzung der Privatsphäre
+     - Beeinträchtigung der Autonomie, Würde und Identität
+  b) Sekundärrisiken für weitere Rechtsgüter und Grundrechte
+     - Recht auf Leben
+     - Physische Unversehrtheit
+     - Eigentum
+     - Weitere Grundrechte
+Für jedes identifizierte Risiko:
+  - Beschreibe die Art des Risikos (systemisch, rechtlich, sicherheitstechnisch)
+  - Bewerte die Eintrittswahrscheinlichkeit
+  - Bewerte die Schwere der Auswirkungen
+  - Nenne die betroffenen Personen
+  - Begründe, warum es als "hoch" einzustufen ist (mit Rechtszitaten, z.B. "Art. 22 Abs. 1 DSG")
+
+4. GEPLANTE MASSNAHMEN ZUR SENKUNG DER BRUTTORISIKEN:
+Vorschlage konkrete Massnahmen zur Risikosenkung:
+  a) Rechtliche Massnahmen (z.B. Verträge, SCC, Datenschutzerklärungen gemäss Art. 19 DSG)
+  b) Organisatorische Massnahmen (z.B. Schulung des Personals, Zugriffskontrollen, Datenschutzberater gemäss Art. 10 DSG)
+  c) Technische Massnahmen (z.B. Verschlüsselung gemäss Art. 8 DSG, Pseudonymisierung, Privacy by Design/Default gemäss Art. 7 DSG)
+Für jede Massnahme: Erkläre, wie sie das Risiko senkt und nenne relevante Rechtsgrundlagen.
+
+5. VERBLEIBENDE NETTORISIKEN (nach Massnahmen):
+Bewerte die Risiken nach den geplanten Massnahmen:
+  - Welche Risiken können durch die Massnahmen auf ein akzeptables Niveau gesenkt werden?
+  - Welche Risiken bleiben trotz Massnahmen hoch?
+  - Gibt es Risiken, die nicht beeinflussbar oder verlässlich einschätzbar sind? (z.B. Zugriffe fremder Behörden bei Datenexport)
+  - Sind die verbleibenden Nettorisiken mit der Datenschutzgesetzgebung als Ganzes vereinbar?
+  - Prüfe insbesondere die Verhältnismässigkeit gemäss Art. 6 DSG
+
+6. ERGEBNIS:
+- Ist ein hohes Nettorisiko vorhanden? (Ja/Nein)
+- Falls ja: Ist das hohe Nettorisiko datenschutzrechtlich akzeptabel oder inakzeptabel?
+- Begründe die Bewertung mit Rechtszitaten (z.B. "Art. 23 Abs. 1 DSG", "Art. 6 DSG")
+- Ist gemäss Art. 23 Abs. 1 DSG eine Vorlage beim EDÖB erforderlich?
+
+7. RISK_LEVEL: [LOW|MEDIUM|HIGH]
+Bestimme das Gesamtrisiko-Niveau basierend auf den Nettorisiken:
+- LOW: Keine oder nur geringe Nettorisiken, keine DSFA-Vorlagepflicht
+- MEDIUM: Erhöhte Risiken, die durch Massnahmen weitgehend gemindert werden können
+- HIGH: Hohe Nettorisiken trotz Massnahmen, möglicherweise Vorlagepflicht beim EDÖB gemäss Art. 23 Abs. 1 DSG
+
+Kontext aus DSG (alle relevanten Artikel):
 ${contextText}
 
-Text to analyse:
+Zu analysierender Text:
 
 "${userText}"
 
-Please format your response as follows:
-SUMMARY: [your summary here with legal citations]
+FORMATIERUNGSREGELN FÜR PDF-OPTIMIERTE AUSGABE:
+- VERWENDE KEIN MARKDOWN (keine **, keine ###, keine Code-Formatierung)
+- Verwende klare Absätze und Aufzählungen
+- Nummeriere Aufzählungen mit Ziffern oder Buchstaben in Klammern: (1), (2), (a), (b), (c)
+- Verwende einfache Listen mit Bindestrichen oder Nummern
+- Jede Massnahme sollte auf einer eigenen Zeile beginnen
+- Strukturierte Abschnitte sollten mit klaren Überschriften beginnen
+
+Bitte formatiere deine Antwort exakt wie folgt (alle Abschnitte müssen vorhanden sein):
+
+ZUSAMMENFASSUNG:
+[Deine Zusammenfassung hier mit Rechtszitaten - als fliessender Text, 2-3 Sätze]
+
+BESCHREIBUNG DER GE PLANTEN BEARBEITUNG:
+[Strukturierte Beschreibung als fliessender Text mit klaren Absätzen für jeden Punkt. Verwende KEINE Markdown-Formatierung. Strukturiere mit einfachen Absätzen, nicht mit Markdown-Listen.]
+
+POTENTIELL HOHE BRUTTORISIKEN:
+[Strukturierte Auflistung als fliessender Text. Beginne mit "Primärrisiken für Privatsphäre und informationelle Selbstbestimmung:" gefolgt von den identifizierten Risiken. Dann "Sekundärrisiken für weitere Rechtsgüter und Grundrechte:" gefolgt von den Risiken. Verwende KEINE Markdown-Formatierung, sondern klare Absätze.]
+
+GEPLANTE MASSNAHMEN ZUR SENKUNG DER BRUTTORISIKEN:
+[Liste die Massnahmen klar strukturiert auf, aber OHNE Markdown. Verwende folgende Struktur:
+
+(1) Rechtliche Massnahmen:
+    - Massnahme 1 mit Begründung und Rechtszitat
+    - Massnahme 2 mit Begründung und Rechtszitat
+
+(2) Organisatorische Massnahmen:
+    - Massnahme 1 mit Begründung und Rechtszitat
+    - Massnahme 2 mit Begründung und Rechtszitat
+
+(3) Technische Massnahmen:
+    - Massnahme 1 mit Begründung und Rechtszitat
+    - Massnahme 2 mit Begründung und Rechtszitat
+
+Jede Massnahme sollte klar beschrieben sein mit: Was wird gemacht, warum senkt es das Risiko, welches Rechtszitat ist relevant.]
+
+VERBLEIBENDE NETTORISIKEN:
+[Bewertung der Nettorisiken nach den Massnahmen als fliessender Text mit klaren Aussagen]
+
+ERGEBNIS:
+[Strukturiertes Ergebnis als fliessender Text. Beantworte: Ist ein hohes Nettorisiko vorhanden? (Ja/Nein). Falls ja oder nein, begründe kurz mit Rechtszitaten. Ist eine Vorlage beim EDÖB erforderlich? (Ja/Nein gemäss Art. 23 Abs. 1 DSG)]
+
 RISK_LEVEL: [LOW|MEDIUM|HIGH]
-JUSTIFICATION: [one sentence justification with exact Swiss law citation, e.g., "Art. 5 DSG"]
-RECOMMENDATIONS:
-- [recommendation 1 with citation, e.g., "Art. 12 ZGB"]
-- [recommendation 2 with citation]
-- [recommendation 3 with citation]
-- [recommendation 4 with citation]
-- [recommendation 5 with citation]`;
+
+EMPFEHLUNGEN:
+[Extrahiere aus den MASSNAHMEN die wichtigsten 3-5 konkreten Handlungsempfehlungen als einfache, nummerierte Liste. Jede Empfehlung sollte eine konkrete, umsetzbare Massnahme sein mit Rechtszitat. Format: 
+1. Konkrete Empfehlung (Art. X DSG)
+2. Konkrete Empfehlung (Art. Y DSG)
+usw.]`;
 };
 
-// Parse the model response to extract structured data
+// Helper function to clean markdown and formatting from text
+const cleanMarkdown = (text: string): string => {
+  if (!text) return text;
+  return text
+    // Remove bold/italic markdown
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/_([^_]+)_/g, '$1')
+    // Remove code blocks
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`([^`]+)`/g, '$1')
+    // Remove headers
+    .replace(/^#{1,6}\s+/gm, '')
+    // Clean up extra whitespace
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+};
+
+// Parse the model response to extract structured DSFA data
 const parseResponse = (response: string): {
   summary: string;
   riskLevel: string;
   analysis: string;
   recommendations: string[];
   legalReferences: LegalReference[];
+  description?: string;
+  bruttorisiken?: string;
+  massnahmen?: string;
+  nettorisiken?: string;
+  ergebnis?: string;
 } => {
   const analysis = response;
   
-  // Extract summary
-  const summaryMatch = response.match(/SUMMARY:\s*(.+?)(?=RISK_LEVEL:|$)/is);
-  const summary = summaryMatch ? summaryMatch[1].trim() : 'No summary provided.';
+  // Extract summary (either old format "SUMMARY:" or new format "ZUSAMMENFASSUNG:")
+  const summaryMatch = response.match(/(?:SUMMARY|ZUSAMMENFASSUNG):\s*(.+?)(?=(?:BESCHREIBUNG|DESCRIPTION|BRUTTORISIKEN|RISK_LEVEL|$))/is);
+  const summary = summaryMatch ? cleanMarkdown(summaryMatch[1].trim()) : 'Keine Zusammenfassung vorhanden.';
   
-  // Extract risk level
+  // Extract description of planned processing
+  const descriptionMatch = response.match(/BESCHREIBUNG[^:]*:\s*(.+?)(?=(?:POTENTIELL|BRUTTORISIKEN|MASSNAHMEN|$))/is);
+  const description = descriptionMatch ? cleanMarkdown(descriptionMatch[1].trim()) : undefined;
+  
+  // Extract bruttorisiken (brutto risks)
+  const bruttorisikenMatch = response.match(/POTENTIELL[^:]*BRUTTORISIKEN[^:]*:\s*(.+?)(?=(?:GEPLANTE|MASSNAHMEN|NETTORISIKEN|$))/is);
+  const bruttorisiken = bruttorisikenMatch ? cleanMarkdown(bruttorisikenMatch[1].trim()) : undefined;
+  
+  // Extract massnahmen (measures)
+  const massnahmenMatch = response.match(/GEPLANTE[^:]*MASSNAHMEN[^:]*:\s*(.+?)(?=(?:VERBLEIBENDE|NETTORISIKEN|ERGEBNIS|RISK_LEVEL|EMPFEHLUNGEN|$))/is);
+  const massnahmen = massnahmenMatch ? cleanMarkdown(massnahmenMatch[1].trim()) : undefined;
+  
+  // Extract nettorisiken (net risks)
+  const nettorisikenMatch = response.match(/VERBLEIBENDE[^:]*NETTORISIKEN[^:]*:\s*(.+?)(?=(?:ERGEBNIS|RISK_LEVEL|EMPFEHLUNGEN|$))/is);
+  const nettorisiken = nettorisikenMatch ? cleanMarkdown(nettorisikenMatch[1].trim()) : undefined;
+  
+  // Extract ergebnis (result)
+  const ergebnisMatch = response.match(/ERGEBNIS:\s*(.+?)(?=(?:RISK_LEVEL|EMPFEHLUNGEN|$))/is);
+  const ergebnis = ergebnisMatch ? cleanMarkdown(ergebnisMatch[1].trim()) : undefined;
+  
+  // Extract risk level (support both old and new format)
   const riskMatch = response.match(/RISK_LEVEL:\s*(LOW|MEDIUM|HIGH)/i);
   const riskLevel = riskMatch ? riskMatch[1].toUpperCase() : 'UNKNOWN';
   
-  // Extract recommendations
-  const recommendationsMatch = response.match(/RECOMMENDATIONS:\s*([\s\S]+?)(?=\n\n|$)/i);
-  const recommendationsText = recommendationsMatch ? recommendationsMatch[1] : '';
-  const recommendations = recommendationsText
-    .split('\n')
-    .map(line => line.replace(/^[-•*]\s*/, '').trim())
-    .filter(line => line.length > 0);
+  // Extract recommendations - check for new EMPFEHLUNGEN section first
+  let recommendations: string[] = [];
+  
+  // Try to extract from dedicated EMPFEHLUNGEN section (new format)
+  const empfehlungenMatch = response.match(/EMPFEHLUNGEN:\s*([\s\S]+?)(?=(?:RISK_LEVEL|$))/i);
+  if (empfehlungenMatch) {
+    const empfehlungenText = cleanMarkdown(empfehlungenMatch[1]);
+    recommendations = empfehlungenText
+      .split('\n')
+      .map(line => {
+        // Remove leading numbers, bullets, dashes, or letters in parentheses
+        line = line.replace(/^[\d]+[\.\)]\s*/, ''); // Remove "1. " or "1) "
+        line = line.replace(/^[\(][a-zA-Z][\)]\s*/, ''); // Remove "(a) " or "(A) "
+        line = line.replace(/^[-•*]\s*/, ''); // Remove "- " or "* " or "• "
+        return line.trim();
+      })
+      .filter(line => line.length > 10 && !line.match(/^[\(][\d]+[\)]\s*$/)) // Filter out very short lines and standalone numbers
+      .slice(0, 10); // Limit to 10 items
+  }
+  
+  // If no recommendations found, try extracting from MASSNAHMEN section
+  if (recommendations.length === 0 && massnahmen) {
+    // Extract individual actionable measures from massnahmen
+    const lines = massnahmen.split('\n');
+    recommendations = lines
+      .map(line => {
+        line = cleanMarkdown(line);
+        // Look for lines that start with numbers, letters in parentheses, or dashes
+        if (line.match(/^[\d]+[\.\)]\s+|^[\(][a-zA-Z][\)]\s+|^[-•*]\s+/)) {
+          line = line.replace(/^[\d]+[\.\)]\s*/, '');
+          line = line.replace(/^[\(][a-zA-Z][\)]\s*/, '');
+          line = line.replace(/^[-•*]\s*/, '');
+          // Extract the actual recommendation text (before any additional explanations)
+          const parts = line.split(':');
+          if (parts.length > 1) {
+            return parts.slice(1).join(':').trim(); // Take everything after the colon
+          }
+          return line.trim();
+        }
+        return null;
+      })
+      .filter((line): line is string => line !== null && line.length > 10)
+      .slice(0, 10);
+  }
+  
+  // If still no recommendations found, try old format
+  if (recommendations.length === 0) {
+    const recommendationsMatch = response.match(/RECOMMENDATIONS:\s*([\s\S]+?)(?=\n\n|$)/i);
+    const recommendationsText = recommendationsMatch ? cleanMarkdown(recommendationsMatch[1]) : '';
+    recommendations = recommendationsText
+      .split('\n')
+      .map(line => {
+        line = line.replace(/^[\d]+[\.\)]\s*/, '');
+        line = line.replace(/^[\(][a-zA-Z][\)]\s*/, '');
+        line = line.replace(/^[-•*]\s*/, '');
+        return line.trim();
+      })
+      .filter(line => line.length > 0);
+  }
   
   // Extract all legal references from the entire response
   const legalReferences = extractLegalReferences(response);
@@ -363,8 +555,13 @@ const parseResponse = (response: string): {
     summary,
     riskLevel,
     analysis,
-    recommendations: recommendations.length > 0 ? recommendations : ['No recommendations provided.'],
-    legalReferences
+    recommendations: recommendations.length > 0 ? recommendations : ['Keine Empfehlungen vorhanden.'],
+    legalReferences,
+    description,
+    bruttorisiken,
+    massnahmen,
+    nettorisiken,
+    ergebnis
   };
 };
 
@@ -429,24 +626,24 @@ app.post('/api/analyze', async (req: Request, res: Response) => {
     console.log(`Using OpenRouter with model: ${requestedModel}`);
 
     // Call OpenRouter API
-    const openRouterResponse = await axios.post(
-      `${OPENROUTER_BASE_URL}/chat/completions`,
-      {
+      const openRouterResponse = await axios.post(
+        `${OPENROUTER_BASE_URL}/chat/completions`,
+        {
         model: requestedModel,
-        messages: [
-          { role: 'user', content: prompt }
-        ],
-        temperature: 0.2
-      },
-      {
-        timeout: 120000,
-        headers: {
-          Authorization: `Bearer ${OPENROUTER_API_KEY}`,
+          messages: [
+            { role: 'user', content: prompt }
+          ],
+          temperature: 0.2
+        },
+        {
+          timeout: 120000,
+          headers: {
+            Authorization: `Bearer ${OPENROUTER_API_KEY}`,
           'HTTP-Referer': OPENROUTER_APP_URL,
-          'X-Title': 'Swiss Legal Assessment'
+            'X-Title': 'Swiss Legal Assessment'
+          }
         }
-      }
-    );
+      );
     
     const modelResponse = openRouterResponse.data?.choices?.[0]?.message?.content || '';
     const parsed = parseResponse(modelResponse);
@@ -456,20 +653,26 @@ app.post('/api/analyze', async (req: Request, res: Response) => {
       riskLevel: parsed.riskLevel,
       analysis: parsed.analysis,
       recommendations: parsed.recommendations,
-      legalReferences: parsed.legalReferences || []
+      legalReferences: parsed.legalReferences || [],
+      // New DSFA structure fields
+      description: parsed.description,
+      bruttorisiken: parsed.bruttorisiken,
+      massnahmen: parsed.massnahmen,
+      nettorisiken: parsed.nettorisiken,
+      ergebnis: parsed.ergebnis
     });
     
   } catch (error: any) {
     console.error('Error analyzing text:', error);
     
-    if (error.code === 'ECONNREFUSED') {
-      return res.status(503).json({ 
-        error: 'Cannot connect to OpenRouter. Please verify OPENROUTER_BASE_URL and API key.' 
-      });
-    }
-    
-    if (error.response) {
-      return res.status(500).json({ 
+      if (error.code === 'ECONNREFUSED') {
+        return res.status(503).json({ 
+          error: 'Cannot connect to OpenRouter. Please verify OPENROUTER_BASE_URL and API key.' 
+        });
+      }
+      
+      if (error.response) {
+        return res.status(500).json({ 
         error: `OpenRouter API error: ${error.response.data?.error?.message || error.response.data?.error || error.message}` 
       });
     }
@@ -490,8 +693,8 @@ if (process.env.NODE_ENV === 'production') {
 // Start server
 if (process.env.NODE_ENV !== 'production' || process.env.VERCEL !== '1') {
   // Only start Express server if not on Vercel (Vercel handles this automatically)
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
     
     if (OPENROUTER_API_KEY) {
       console.log(`OpenRouter configured: ${OPENROUTER_BASE_URL}`);
